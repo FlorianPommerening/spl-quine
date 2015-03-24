@@ -6,6 +6,7 @@ from spl.generated import random_assignment_command, random_print_char_command, 
 import spl.tokens
 import spl.utilities
 
+import itertools
 import sys
 from Frame import *
 
@@ -34,13 +35,11 @@ codeblock = [code_block_print_prefix]
 #</auto>
 
 characters = ["Capulet:", "Montague:"]
-character_no = 1
 
-for char in prefix:
-    codeblock += [characters[character_no]]
-    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(char)])]
+for character, symbol in zip(itertools.cycle(characters), prefix):
+    codeblock += [character]
+    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(symbol)])]
     codeblock += ["\t" + random_print_char_command()]
-    character_no = 1 - character_no
 
 codeblock += [code_block_reverse_stack]
 
@@ -49,8 +48,8 @@ codeblock += [code_block_reverse_stack]
 #	Remember
 #</auto>
 
-for char in "Juliet:\n\tRemember ":
-    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(char)])]
+for symbol in "Juliet:\n\tRemember ":
+    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(symbol)])]
     codeblock += ["\t" + random_print_char_command()]
 
 codeblock += ["\tYou are as villainous as Montague."]
@@ -81,8 +80,8 @@ codeblock += [code_block_act_3_scene_2]
 #</auto>
 
 
-for char in "\nCapulet:\n\tYou are as worried as the sum of yourself and the son.":
-    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(char)])]
+for symbol in "\nCapulet:\n\tYou are as worried as the sum of yourself and the son.":
+    codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(symbol)])]
     codeblock += ["\t" + random_print_char_command()]
 
 codeblock += [code_block_return_from_act_3]
@@ -101,8 +100,8 @@ for scene_number, key in zip(scene_numbers, ordered_keys):
     codeblock += ["\t\tScene " + scene_number + ": Even more accusations."]
     codeblock += [""]
     codeblock += ["Capulet:"]
-    for char in spl.constants.NUMBERS[key]:
-        codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(char)])]
+    for symbol in spl.constants.NUMBERS[key]:
+        codeblock += ["\t" + random_assignment_command(spl.constants.NUMBERS[ord(symbol)])]
         codeblock += ["\t" + random_print_char_command()]
     codeblock += ["\t" + random_return_to_scene_command("II")]
     codeblock += [""]
@@ -111,9 +110,9 @@ codeblock += [code_block_act_4_scene_1]
 
 code = "\n".join(codeblock)
 
-for char in code:
+for symbol in code:
     print("Juliet:")
-    print("\tRemember %s." % spl.constants.NUMBERS[ord(char)])
+    print("\tRemember %s." % spl.constants.NUMBERS[ord(symbol)])
     print("Capulet:")
     print("\tYou are as worried as the sum of yourself and the son.")
 
