@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-import spl
+import spl.constants
+import spl.tokens
+import spl.utilities
 
 import sys
 from Frame import *
