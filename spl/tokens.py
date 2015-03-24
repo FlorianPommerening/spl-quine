@@ -1,37 +1,37 @@
-negative_adjectives = [
+NEGATIVE_ADJECTIVES = [
     "bad", "cowardly", "cursed", "damned", "dirty", "disgusting", "distasteful", "dusty", "evil", "fat", "fat-kidneyed",
     "fatherless", "foul", "hairy", "half-witted", "horrible", "horrid", "infected", "lying", "miserable", "misused",
     "oozing", "rotten", "smelly", "snotty", "sorry", "stinking", "stuffed", "stupid", "vile", "villainous", "worried"]
 
-neutral_adjectives = [
+NEUTRAL_ADJECTIVES = [
     "big", "black", "blue", "bluest", "bottomless", "furry", "green", "hard", "huge", "large", "little", "normal",
     "old", "purple", "red", "rural", "small", "tiny", "white", "yellow"]
 
-positive_adjectives = [
+POSITIVE_ADJECTIVES = [
     "amazing", "beautiful", "blossoming", "bold", "brave", "charming", "clearest", "cunning", "cute", "delicious",
     "embroidered", "fair", "fine", "gentle", "golden", "good", "handsome", "happy", "healthy", "honest", "lovely",
     "loving", "mighty", "noble", "peaceful", "pretty", "prompt", "proud", "reddest", "rich", "smooth", "sunny", "sweet",
     "sweetest", "trustworthy", "warm"]
 
-adjectives = negative_adjectives + neutral_adjectives + positive_adjectives
+ADJECTIVES = NEGATIVE_ADJECTIVES + NEUTRAL_ADJECTIVES + POSITIVE_ADJECTIVES
 
-negative_nouns = [
+NEGATIVE_NOUNS = [
     "Hell", "bastard", "beggar", "blister", "codpiece", "coward", "curse", "death", "devil", "draught", "famine",
     "flirt-gill", "goat", "hate", "hog", "hound", "leech", "lie", "pig", "plague", "starvation", "toad", "war", "wolf"]
 
-neutral_nouns = [
+NEUTRAL_NOUNS = [
     "animal", "aunt", "brother", "cat", "chihuahua", "cousin", "cow", "daughter", "door", "face", "father", "fellow",
     "granddaughter", "grandfather", "grandmother", "grandson", "hair", "hamster", "horse", "lamp", "lantern",
     "mistletoe", "moon", "morning", "mother", "nephew", "niece", "nose", "purse", "road", "roman", "sister", "sky",
     "son", "squirrel", "stone wall", "thing", "town", "tree", "uncle", "wind"]
 
-positive_nouns = [
+POSITIVE_NOUNS = [
     "Heaven", "King", "Lord", "angel", "flower", "happiness", "joy", "plum", "summer's day", "hero", "rose", "kingdom",
     "pony"]
 
-nouns = negative_nouns + neutral_nouns + positive_nouns
+NOUNS = NEGATIVE_NOUNS + NEUTRAL_NOUNS + POSITIVE_NOUNS
 
-characters = [
+CHARACTERS = [
     "Achilles", "Adonis", "Adriana", "Aegeon", "Aemilia", "Agamemnon", "Agrippa", "Ajax", "Alonso", "Andromache",
     "Angelo", "Antiochus", "Antonio", "Arthur", "Autolycus", "Balthazar", "Banquo", "Beatrice", "Benedick", "Benvolio",
     "Bianca", "Brabantio", "Brutus", "Capulet", "Cassandra", "Cassius", "Christopher Sly", "Cicero", "Claudio",
@@ -49,3 +49,9 @@ characters = [
     "Stephano", "Thaisa", "The Abbot of Westminster", "The Apothecary", "The Archbishop of Canterbury",
     "The Duke of Milan", "The Duke of Venice", "The Ghost", "Theseus", "Thurio", "Timon", "Titania", "Titus", "Troilus",
     "Tybalt", "Ulysses", "Valentine", "Venus", "Vincentio", "Viola"]
+
+ASSIGNMENT_COMMANDS = ["You are as %s as %s.", "Thou art as %s as %s."]
+VALUE_TEST_COMMANDS = ["Are you as %s as %s?"]
+PRINT_CHAR_COMMANDS = ["Speak your mind."]
+RETURN_TO_SCENE_COMMANDS = ["Let us return to scene %s."]
+CONDITIONAL_PROCEED_TO_SCENE_COMMANDS = ["If so, let us proceed to scene %s."]

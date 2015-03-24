@@ -15,7 +15,7 @@ print(prefix)
 # create datastack
 # <auto>
 #Juliet:
-#	Rember the sum of ...
+#	Remember the sum of ...
 #Capulet:
 #	You are as worried as the sum of yourself and the son.
 #</auto>
@@ -34,32 +34,32 @@ codeblock = [code_block_print_prefix]
 
 characters = ["Capulet:", "Montague:"]
 character_no = 1
-youareas = ["You are as ", "Thou art as "]
+
 for char in prefix:
     codeblock += [characters[character_no]]
-    line = ["\t", choice(youareas), choice(spl.tokens.adjectives), " as ", spl.constants.NUMBERS[ord(char)]]
+    line = ["\t", choice(spl.tokens.ASSIGNMENT_COMMANDS) % (choice(spl.tokens.ADJECTIVES), spl.constants.NUMBERS[ord(char)])]
     codeblock += ["".join(line)]
-    codeblock += ["\tSpeak your mind."]
+    codeblock += ["\t" + choice(spl.tokens.PRINT_CHAR_COMMANDS)]
     character_no = 1 - character_no
 
 codeblock += [code_block_reverse_stack]
 
 #<auto>
 #Juliet:
-#	Rember 
+#	Remember
 #</auto>
 
 for char in "Juliet:\n\tRemember ":
-    line = ["\t", choice(youareas), choice(spl.tokens.adjectives), " as ", spl.constants.NUMBERS[ord(char)]]
+    line = ["\t", choice(spl.tokens.ASSIGNMENT_COMMANDS) % (choice(spl.tokens.ADJECTIVES), spl.constants.NUMBERS[ord(char)])]
     codeblock += ["".join(line)]
-    codeblock += ["\tSpeak your mind."]
+    codeblock += ["\t" + choice(spl.tokens.PRINT_CHAR_COMMANDS)]
 
 codeblock += ["\tYou are as villainous as Montague."]
 
 #<auto>
 #	You are as good as Montague
-#	Are you as good as <codierung von a>
-#	If so let us proceed to scene <scene von a>
+#	Are you as good as <spl code of a>
+#	If so let us proceed to scene <scene of a>
 #	...
 #</auto>
 
@@ -70,9 +70,9 @@ for i in range(len(ordered_keys)):
     scene_numbers.append(spl.utilities.scene_number(i + 3))
 
 for scene_number, key in zip(scene_numbers, ordered_keys):
-    line = ["\t", "Are you as ", choice(spl.tokens.adjectives), " as ", spl.constants.NUMBERS[key][:-1], "?"]
+    line = ["\t", choice(spl.tokens.VALUE_TEST_COMMANDS) % (choice(spl.tokens.ADJECTIVES), spl.constants.NUMBERS[key])]
     codeblock += ["".join(line)]
-    codeblock += ["\tIf so, let us proceed to scene " + scene_number + "."]
+    codeblock += ["\t" % choice(spl.tokens.CONDITIONAL_PROCEED_TO_SCENE_COMMANDS) % scene_number]
 
 codeblock += [code_block_act_3_scene_2]
 
@@ -84,9 +84,9 @@ codeblock += [code_block_act_3_scene_2]
 
 
 for char in "\nCapulet:\n\tYou are as worried as the sum of yourself and the son.":
-    line = ["\t", choice(youareas), choice(spl.tokens.adjectives), " as ", spl.constants.NUMBERS[ord(char)]]
+    line = ["\t", choice(spl.tokens.ASSIGNMENT_COMMANDS) % (choice(spl.tokens.ADJECTIVES), spl.constants.NUMBERS[ord(char)])]
     codeblock += ["".join(line)]
-    codeblock += ["\tSpeak your mind."]
+    codeblock += ["\t" + choice(spl.tokens.PRINT_CHAR_COMMANDS)]
 
 codeblock += [code_block_return_from_act_3]
 
@@ -94,20 +94,22 @@ codeblock += [code_block_return_from_act_3]
 #	Scene __: Even more accusations.
 #
 #Capulet:\n
-# for char in codierung a 
-#    You are as good as <codierung von char>.
+# for char in "<spl code of a>"
+#    You are as good as <spl code of char>.
 #    Speak your mind.
 #</auto>
 
 
 for scene_number, key in zip(scene_numbers, ordered_keys):
-    codeblock += ["\t\tScene " + scene_number + ": Even more accusations.\n"]
+    codeblock += ["\t\tScene " + scene_number + ": Even more accusations."]
+    codeblock += [""]
     codeblock += ["Capulet:"]
     for char in spl.constants.NUMBERS[key]:
-        line = ["\t", choice(youareas), choice(spl.tokens.adjectives), " as ", spl.constants.NUMBERS[ord(char)]]
+        line = ["\t", choice(spl.tokens.ASSIGNMENT_COMMANDS) % (choice(spl.tokens.ADJECTIVES), spl.constants.NUMBERS[ord(char)])]
         codeblock += ["".join(line)]
-        codeblock += ["\tSpeak your mind."]
-    codeblock += ["\tLet us return to scene II.\n"]
+        codeblock += ["\t", choice(spl.tokens.PRINT_CHAR_COMMANDS)]
+    codeblock += ["\t" + choice(spl.tokens.RETURN_TO_SCENE_COMMANDS) % "II"]
+    codeblock += [""]
 
 codeblock += [code_block_act_4_scene_1]
 
@@ -115,14 +117,14 @@ code = "\n".join(codeblock)
 
 for char in code:
     print("Juliet:")
-    print("\tRemember " + spl.constants.NUMBERS[ord(char)])
+    print("\tRemember %s." % spl.constants.NUMBERS[ord(char)])
     print("Capulet:")
     print("\tYou are as worried as the sum of yourself and the son.")
 
 # create datastack
 #<auto>
 #Juliet:
-#	Rember the sum of ...
+#	Remember the sum of ...
 #Capulet:
 #	You are as worried as the sum of yourself and the son.
 #</auto>

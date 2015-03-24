@@ -32,7 +32,7 @@ Friar John:
 """
 #<auto>
 #Juliet:
-#	Rember the sum of ...
+#	Remember the sum of ...
 #Capulet:
 #	You are as worried as the sum of yourself and the son.
 #</auto>
@@ -168,13 +168,13 @@ Capulet:
     Remember yourself."""
 #<auto>
 #Juliet:
-#	Rember 
+#	Remember
 #</auto>
 
 #<auto>
 #	You are as good as Montague
-#	Are you as good as <codierung von a>
-#	If so let us proceed to scene <scene von a>
+#	Are you as good as <spl code of a>
+#	If so let us proceed to scene <scene of a>
 #	...
 #</auto>
 
@@ -201,8 +201,8 @@ code_block_return_from_act_3="""
 #	Scene __: Even more accusations.
 #
 #Capulet:\n
-# for char in codierung a 
-#    You are as good as <codierung von char>.
+# for char in "<spl code of a>"
+#    You are as good as <spl code of char>.
 #    Speak your mind.
 #</auto>
 
