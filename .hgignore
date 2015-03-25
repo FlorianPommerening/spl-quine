@@ -1,6 +1,7 @@
 syntax: glob
 .svn
-quine
 quine.spl
 test
 test.spl
+**.pyc
+.idea/workspace.xml
