@@ -19,11 +19,6 @@ def random_value_test_command(value):
     return command % (adjective, value)
 
 
-def random_return_to_scene_command(scene):
-    command = random.choice(tokens.RETURN_TO_SCENE_COMMANDS)
-    return command % scene
-
-
 def random_conditional_proceed_to_scene_command(scene):
     command = random.choice(tokens.CONDITIONAL_PROCEED_TO_SCENE_COMMANDS)
     return command % scene

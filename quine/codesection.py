@@ -1,10 +1,12 @@
 import itertools
-from .handwritten import CODE_PRINT_PREFIX_START, CODE_PRINT_PREFIX_CHARACTERS, NUMBERS, code_block_reverse_stack, \
-    code_block_act_3_scene_2, code_block_act_4_scene_1, code_block_return_from_act_3, \
-    DATA_PUSH_COMMAND_BEFORE, DATA_PUSH_COMMAND_AFTER
+from .handwritten import CODE_PRINT_PREFIX_START, CODE_PRINT_PREFIX_ACTORS, NUMBERS, CODE_PRINT_DATA_SETUP, \
+    UTILITY_SWITCH_CASE_END, CODE_END_OF_PROGRAM, UTILITY_PRINT_PUSH_COMMAND_END, \
+    DATA_PUSH_COMMAND_BEFORE, DATA_PUSH_COMMAND_AFTER, CODE_PRINT_PREFIX_END, CODE_PRINT_DATA_LOOP, \
+    CODE_PRINT_CODE_SETUP, CODE_PRINT_CODE_LOOP, UTILITY_PRINT_PUSH_COMMAND_START, UTILITY_SWITCH_CASE_START, \
+    UTILITY_PRINT_CHARACTER_ACTORS, UTILITY_PRINT_CHARACTER_START, UTILITY_PRINT_CHARACTER_END
 import spl.utilities
 from spl.generated import random_assignment_command, random_print_char_command, random_value_test_command, \
-    random_conditional_proceed_to_scene_command, random_return_to_scene_command
+    random_conditional_proceed_to_scene_command
 
 
 def generate(prefix):
@@ -26,31 +28,29 @@ def generate(prefix):
 
     :return: a string containing the full source code for the code section.
     """
-    code_lines = [CODE_PRINT_PREFIX_START]
+    code_lines = []
 
     # Hard-code printing commands for the prefix
-    actors = CODE_PRINT_PREFIX_CHARACTERS
-    for actor, symbol in zip(itertools.cycle(actors), prefix):
-        code_lines += [actor + ":"]
-        number = NUMBERS[ord(symbol)]
-        code_lines += ["\t" + random_assignment_command(number)]
-        code_lines += ["\t" + random_print_char_command()]
+    code_lines.append(CODE_PRINT_PREFIX_START)
+    code_lines.append(generate_print_statements(prefix, CODE_PRINT_PREFIX_ACTORS))
+    code_lines.append(CODE_PRINT_PREFIX_END)
 
-    code_lines += [code_block_reverse_stack]
+    code_lines.append(CODE_PRINT_DATA_SETUP)
+    code_lines.append(CODE_PRINT_DATA_LOOP)
 
-    #<auto>
+    code_lines.append(CODE_PRINT_CODE_SETUP)
+    code_lines.append(CODE_PRINT_CODE_LOOP)
+
+    code_lines.append(UTILITY_PRINT_PUSH_COMMAND_START)
+
+    # <auto>
     #Juliet:
     #	Remember
     #</auto>
-    for symbol in DATA_PUSH_COMMAND_BEFORE:
-        number = NUMBERS[ord(symbol)]
-        code_lines += ["\t" + random_assignment_command(number)]
-        code_lines += ["\t" + random_print_char_command()]
-
-    code_lines += ["\tYou are as villainous as Montague."]
+    code_lines.append(generate_print_statements(DATA_PUSH_COMMAND_BEFORE))
+    code_lines.append(UTILITY_SWITCH_CASE_START)
 
     #<auto>
-    #	You are as good as Montague
     #	Are you as good as <spl code of a>
     #	If so let us proceed to scene <scene of a>
     #	...
@@ -63,22 +63,19 @@ def generate(prefix):
         scene_numbers.append(spl.utilities.scene_number(i + 3))
 
     for scene_number, key in zip(scene_numbers, ordered_keys):
-        code_lines += ["\t" + random_value_test_command(NUMBERS[key])]
-        code_lines += ["\t" + random_conditional_proceed_to_scene_command(scene_number)]
+        code_lines.append("\t" + random_value_test_command(NUMBERS[key]))
+        code_lines.append("\t" + random_conditional_proceed_to_scene_command(scene_number))
 
-    code_lines += [code_block_act_3_scene_2]
+    code_lines.append(UTILITY_SWITCH_CASE_END)
 
     #<auto>
     #.\n
     #Capulet:
     #	You are as worried as the sum of yourself and the son.
     #</auto>
-    for symbol in DATA_PUSH_COMMAND_AFTER:
-        number = NUMBERS[ord(symbol)]
-        code_lines += ["\t" + random_assignment_command(number)]
-        code_lines += ["\t" + random_print_char_command()]
+    code_lines.append(generate_print_statements(DATA_PUSH_COMMAND_AFTER))
 
-    code_lines += [code_block_return_from_act_3]
+    code_lines.append(UTILITY_PRINT_PUSH_COMMAND_END)
 
     #<auto>
     #	Scene __: Even more accusations.
@@ -89,17 +86,39 @@ def generate(prefix):
     #    Speak your mind.
     #</auto>
     for scene_number, key in zip(scene_numbers, ordered_keys):
-        code_lines += ["\t\tScene " + scene_number + ": Even more accusations."]
-        code_lines += [""]
-        code_lines += ["Capulet:"]
-        for symbol in NUMBERS[key]:
-            number = NUMBERS[ord(symbol)]
-            code_lines += ["\t" + random_assignment_command(number)]
-            code_lines += ["\t" + random_print_char_command()]
-        code_lines += ["\t" + random_return_to_scene_command("II")]
-        code_lines += [""]
+        code_lines.append(UTILITY_PRINT_CHARACTER_START % scene_number)
+        code_lines.append(generate_print_statements(NUMBERS[key], UTILITY_PRINT_CHARACTER_ACTORS))
+        code_lines.append(UTILITY_PRINT_CHARACTER_END)
 
-    code_lines += [code_block_act_4_scene_1]
+    code_lines.append(CODE_END_OF_PROGRAM)
 
     return "\n".join(code_lines)
 
+
+def generate_print_statements(text, actors=None):
+    """
+    Generate randomized SPL code to print the given text letter by letter.
+    :param text: the text to print
+    :param actors: the actors that should say the print line. If None, we
+                   assume the actor is already talking and add no line to
+                   indicate the actor. Otherwise, the list must contain either
+                   one actor whose line is added before all the print
+                   statements, or two actors who will take turns printing the
+                   text.
+    :return: a string containing code statements to print the text.
+    """
+    code_lines = []
+    if actors is None:
+        actors = [None]
+    elif len(actors) == 1:
+        code_lines = [actors[0] + ":"]
+    else:
+        assert len(actors) == 2
+
+    for actor, symbol in zip(itertools.cycle(actors), text):
+        if len(actors) > 1:
+            code_lines += [actor + ":"]
+        number = NUMBERS[ord(symbol)]
+        code_lines += ["\t" + random_assignment_command(number)]
+        code_lines += ["\t" + random_print_char_command()]
+    return "\n".join(code_lines)

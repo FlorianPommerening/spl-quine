@@ -105,10 +105,10 @@ Capulet:
 CODE_PRINT_PREFIX_START = """
 [Exit Juliet]
 
+
 \t\tScene II: Reenactment of the Past.
 
 [Enter Montague]
-
 """
 
 # === Generated block: Printing the Prefix Section ===
@@ -125,16 +125,18 @@ CODE_PRINT_PREFIX_START = """
 # Capulet:
 #     Thou art as ... as .. .
 #     Speak your Mind.
-CODE_PRINT_PREFIX_CHARACTERS = ["Montague", "Capulet"]
+CODE_PRINT_PREFIX_ACTORS = ["Montague", "Capulet"]
 
-# TODO: clean up starting from here.
+CODE_PRINT_PREFIX_END = "[Exeunt]"
 
-code_block_reverse_stack = """
-[Exeunt]
-[Enter Romeo and Juliet]
+
+# TODO: document starting from here.
+
+CODE_PRINT_DATA_SETUP = """[Enter Romeo and Juliet]
 
 Juliet:
 \tYou are as loving as me.
+
 
 \t\tScene III: Reunion.
 
@@ -155,9 +157,9 @@ Capulet:
 
 Montague:
 \tYou are as smelly as the sum of yourself and a flirt-gill.
-\tWe must return to scene III.
+\tWe must return to scene III."""
 
-
+CODE_PRINT_DATA_LOOP = """
 \t\tScene IV: Romeo's answer.
 
 [Exeunt]
@@ -165,6 +167,7 @@ Montague:
 
 Romeo:
 \tYou are as loving as me.
+
 
 
 \t\tAct II: Output.
@@ -188,8 +191,9 @@ Montague:
 
 Capulet:
 \tYou are as smelly as the sum of yourself and a wolf.
-\tWe shall proceed to act III.
+\tWe shall proceed to act III."""
 
+CODE_PRINT_CODE_SETUP = """
 \t\tScene II: Juliet's answer.
 
 [Exeunt]
@@ -198,7 +202,8 @@ Capulet:
 Juliet:
 \tYou are as loving as me.
 
-\tScene III: Re-Retaliation.
+
+\t\tScene III: Re-Retaliation.
 
 [Exeunt]
 [Enter Capulet and Montague]
@@ -217,9 +222,11 @@ Capulet:
 
 Montague:
 \tYou are as smelly as the sum of yourself and a flirt-gill.
-\tWe must return to scene III.
+\tWe must return to scene III."""
 
-\tScene IV: Montague loses it.
+
+CODE_PRINT_CODE_LOOP = """
+\t\tScene IV: Montague loses it.
 
 [Exeunt]
 [Enter Montague and Romeo]
@@ -234,12 +241,13 @@ Romeo:
 
 Montague:
 \tYou are as rotten as the sum of yourself and the plague.
-\tWe must return to scene IV.
+\tWe must return to scene IV."""
 
+UTILITY_PRINT_PUSH_COMMAND_START = """
 
-\t\tAct III: Meta Play.
+\t\t\tAct III: Meta Play.
 
-\tScene I: Capulet's accusations.
+\t\tScene I: Capulet's accusations.
 
 Capulet:
 \tRemember yourself."""
@@ -247,20 +255,18 @@ Capulet:
 #Juliet:
 #\tRemember
 #</auto>
-
+UTILITY_SWITCH_CASE_START = "\tYou are as villainous as Montague."
 #<auto>
-#\tYou are as good as Montague
 #\tAre you as good as <spl code of a>
 #\tIf so let us proceed to scene <scene of a>
 #\t...
 #</auto>
 
 
-code_block_act_3_scene_2="""
-\tScene II: More accusations.
+UTILITY_SWITCH_CASE_END = """
+\t\tScene II: More accusations.
 
-Capulet:
-"""
+Capulet:"""
 
 #<auto>
 #\n
@@ -269,11 +275,15 @@ Capulet:
 #</auto>
 
 
-code_block_return_from_act_3="""
+UTILITY_PRINT_PUSH_COMMAND_END = """
 \tRecall everything I told you.
 \tWe shall return to act II.
 """
 
+UTILITY_PRINT_CHARACTER_START = """
+
+\t\tScene %s: Even more accusations."""
+UTILITY_PRINT_CHARACTER_ACTORS = ["Capulet"]
 #<auto>
 #\tScene __: Even more accusations.
 #
@@ -282,11 +292,12 @@ code_block_return_from_act_3="""
 #\tYou are as good as <spl code of char>.
 #\tSpeak your mind.
 #</auto>
+UTILITY_PRINT_CHARACTER_END = "\tLet us return to scene II."
 
-code_block_act_4_scene_1="""
-\t\tAct IV: Fin.
+CODE_END_OF_PROGRAM = """
+\t\t\tAct IV: Fin.
 
-\tScene I: No questions left.
+\t\tScene I: No questions left.
 
 [Exeunt]
 """
@@ -321,7 +332,7 @@ NUMBERS = {
     9:   "the square of the Apothecary",
     10:  "the sum of a rural cow and a furry large white horse",
     # 11 - 31 not needed
-    32:  "a amazing beautiful blossoming tiny purple flower",
+    32:  "an amazing beautiful blossoming tiny purple flower",
     # 33 - 38 not needed
     39:  "the sum of the Apothecary and the sum of the peaceful sunny moon and a warm yellow old little pretty lantern",
     # 40 - 43 not needed

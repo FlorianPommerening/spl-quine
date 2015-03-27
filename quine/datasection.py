@@ -12,6 +12,8 @@ def generate(code):
     """
     code_lines = []
     for symbol in code:
-        number = NUMBERS[ord(symbol)]
-        code_lines.append(DATA_PUSH_COMMAND_BEFORE + number + DATA_PUSH_COMMAND_AFTER)
+        push_command = (DATA_PUSH_COMMAND_BEFORE
+                        + NUMBERS[ord(symbol)]
+                        + DATA_PUSH_COMMAND_AFTER)
+        code_lines.append(push_command)
     return "\n".join(code_lines)

@@ -53,5 +53,4 @@ CHARACTERS = [
 ASSIGNMENT_COMMANDS = ["You are as %s as %s.", "Thou art as %s as %s."]
 VALUE_TEST_COMMANDS = ["Are you as %s as %s?"]
 PRINT_CHAR_COMMANDS = ["Speak your mind."]
-RETURN_TO_SCENE_COMMANDS = ["Let us return to scene %s."]
 CONDITIONAL_PROCEED_TO_SCENE_COMMANDS = ["If so, let us proceed to scene %s."]
