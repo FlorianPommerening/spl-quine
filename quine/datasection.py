@@ -11,7 +11,7 @@ def generate(code):
     :return: a string containing the full source code for the data section.
     """
     code_lines = [generate_push_command(symbol) for symbol in code]
-    return "\n".join(code_lines)
+    return "".join(code_lines)
 
 
 def generate_push_command(symbol):

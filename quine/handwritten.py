@@ -59,7 +59,6 @@ Friar John:
 
 [Exeunt]
 [Enter Capulet and Juliet]
-
 """
 
 # =============== DATA SECTION ===============
@@ -78,7 +77,8 @@ DATA_PUSH_COMMAND_BEFORE = """Juliet:
 # count the new item (Note that the "." that ends Juliet's sentence):
 DATA_PUSH_COMMAND_AFTER = """.
 Capulet:
-\tYou are as worried as the sum of yourself and the son."""
+\tYou are as worried as the sum of yourself and the son.
+"""
 
 # These two commands are repeated until all data is on Capulet in reversed order.
 
