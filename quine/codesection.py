@@ -1,9 +1,5 @@
 import itertools
-from .handwritten import CODE_PRINT_PREFIX_START, CODE_PRINT_PREFIX_ACTORS, NUMBERS, CODE_PRINT_DATA_SETUP, \
-    UTILITY_SWITCH_CASE_END, CODE_END_OF_PROGRAM, UTILITY_PRINT_PUSH_COMMAND_END, \
-    DATA_PUSH_COMMAND_BEFORE, DATA_PUSH_COMMAND_AFTER, CODE_PRINT_PREFIX_END, CODE_PRINT_DATA_LOOP, \
-    CODE_PRINT_CODE_SETUP, CODE_PRINT_CODE_LOOP, UTILITY_PRINT_PUSH_COMMAND_START, UTILITY_SWITCH_CASE_START, \
-    UTILITY_PRINT_CHARACTER_ACTORS, UTILITY_PRINT_CHARACTER_START, UTILITY_PRINT_CHARACTER_END
+from . import handwritten
 import spl.utilities
 from spl.generated import random_assignment_command, random_print_char_command, random_value_test_command, \
     random_conditional_proceed_to_scene_command
@@ -28,69 +24,50 @@ def generate(prefix):
 
     :return: a string containing the full source code for the code section.
     """
-    code_lines = []
+    # Print prefix section
+    code_lines = [
+        handwritten.CODE_PRINT_PREFIX_START,
+        generate_print_statements(prefix, handwritten.CODE_PRINT_PREFIX_ACTORS),
+        handwritten.CODE_PRINT_PREFIX_END,
+    ]
 
-    # Hard-code printing commands for the prefix
-    code_lines.append(CODE_PRINT_PREFIX_START)
-    code_lines.append(generate_print_statements(prefix, CODE_PRINT_PREFIX_ACTORS))
-    code_lines.append(CODE_PRINT_PREFIX_END)
+    # Print data section
+    code_lines += [
+        handwritten.CODE_PRINT_DATA_SETUP,
+        handwritten.CODE_PRINT_DATA_LOOP,
+    ]
 
-    code_lines.append(CODE_PRINT_DATA_SETUP)
-    code_lines.append(CODE_PRINT_DATA_LOOP)
+    # Print code section
+    code_lines += [
+        handwritten.CODE_PRINT_CODE_SETUP,
+        handwritten.CODE_PRINT_CODE_LOOP,
+    ]
 
-    code_lines.append(CODE_PRINT_CODE_SETUP)
-    code_lines.append(CODE_PRINT_CODE_LOOP)
+    # Utility section
+    number_scenes = [(spl.utilities.scene_number(i), literal)
+                     for i, literal in enumerate(sorted(handwritten.LITERALS.values()), start=3)]
 
-    code_lines.append(UTILITY_PRINT_PUSH_COMMAND_START)
+    code_lines += [
+        handwritten.UTILITY_PRINT_PUSH_COMMAND_START,
+        generate_print_statements(handwritten.DATA_PUSH_COMMAND_BEFORE),
+        handwritten.UTILITY_SWITCH_CASE_START,
+        generate_switch_statement(number_scenes),
+        handwritten.UTILITY_SWITCH_CASE_END,
+        generate_print_statements(handwritten.DATA_PUSH_COMMAND_AFTER),
+        handwritten.UTILITY_PRINT_PUSH_COMMAND_END,
+    ]
 
-    # <auto>
-    #Juliet:
-    #	Remember
-    #</auto>
-    code_lines.append(generate_print_statements(DATA_PUSH_COMMAND_BEFORE))
-    code_lines.append(UTILITY_SWITCH_CASE_START)
+    for scene_number, literal in number_scenes:
+        code_lines += [
+            handwritten.UTILITY_PRINT_LITERAL_START % scene_number,
+            generate_print_statements(literal),
+            handwritten.UTILITY_PRINT_LITERAL_END
+        ]
 
-    #<auto>
-    #	Are you as good as <spl code of a>
-    #	If so let us proceed to scene <scene of a>
-    #	...
-    #</auto>
-
-    ordered_keys = sorted(NUMBERS.keys())
-    scene_numbers = []
-
-    for i in range(len(ordered_keys)):
-        scene_numbers.append(spl.utilities.scene_number(i + 3))
-
-    for scene_number, key in zip(scene_numbers, ordered_keys):
-        code_lines.append("\t" + random_value_test_command(NUMBERS[key]))
-        code_lines.append("\t" + random_conditional_proceed_to_scene_command(scene_number))
-
-    code_lines.append(UTILITY_SWITCH_CASE_END)
-
-    #<auto>
-    #.\n
-    #Capulet:
-    #	You are as worried as the sum of yourself and the son.
-    #</auto>
-    code_lines.append(generate_print_statements(DATA_PUSH_COMMAND_AFTER))
-
-    code_lines.append(UTILITY_PRINT_PUSH_COMMAND_END)
-
-    #<auto>
-    #	Scene __: Even more accusations.
-    #
-    #Capulet:\n
-    # for char in "<spl code of a>"
-    #    You are as good as <spl code of char>.
-    #    Speak your mind.
-    #</auto>
-    for scene_number, key in zip(scene_numbers, ordered_keys):
-        code_lines.append(UTILITY_PRINT_CHARACTER_START % scene_number)
-        code_lines.append(generate_print_statements(NUMBERS[key], UTILITY_PRINT_CHARACTER_ACTORS))
-        code_lines.append(UTILITY_PRINT_CHARACTER_END)
-
-    code_lines.append(CODE_END_OF_PROGRAM)
+    # Final section
+    code_lines += [
+        handwritten.CODE_END_OF_PROGRAM
+    ]
 
     return "\n".join(code_lines)
 
@@ -118,7 +95,21 @@ def generate_print_statements(text, actors=None):
     for actor, symbol in zip(itertools.cycle(actors), text):
         if len(actors) > 1:
             code_lines += [actor + ":"]
-        number = NUMBERS[ord(symbol)]
+        number = handwritten.LITERALS[ord(symbol)]
         code_lines += ["\t" + random_assignment_command(number)]
         code_lines += ["\t" + random_print_char_command()]
+    return "\n".join(code_lines)
+
+
+def generate_switch_statement(number_scenes):
+    """
+    Generate randomized SPL code for a switch statement that jumps to a different scene
+    for each literal.
+    :param number_scenes: list of tuples (s, l) where s is the label of the scene for literal l.
+    :return: a string containing code statements to jump to the correct scene.
+    """
+    code_lines = []
+    for scene_number, literal in number_scenes:
+        code_lines.append("\t" + random_value_test_command(literal))
+        code_lines.append("\t" + random_conditional_proceed_to_scene_command(scene_number))
     return "\n".join(code_lines)

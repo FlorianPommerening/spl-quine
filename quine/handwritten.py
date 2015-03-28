@@ -129,9 +129,16 @@ CODE_PRINT_PREFIX_ACTORS = ["Montague", "Capulet"]
 
 CODE_PRINT_PREFIX_END = "[Exeunt]"
 
-
-# TODO: document starting from here.
-
+# === Printing the Data Section ===
+# To print the data section, we want to loop through the data and for each
+# entry, print the line that that added this entry to the stack. Since the
+# stack that currently holds the data is, contains it in reverse order, we
+# first have to reverse it. This is done by the following code block which
+# moves the data from Capulet to Montague, and reverses it in the process.
+# Capulet is also used as a temporary copy of Juliet's value to avoid calling
+# her on stage for the test that ends the loop.
+# Romeo counts the elements on Montague, but instead of adding one for each new
+# element, we copy the total count before reversing the stack.
 CODE_PRINT_DATA_SETUP = """[Enter Romeo and Juliet]
 
 Juliet:
@@ -159,6 +166,16 @@ Montague:
 \tYou are as smelly as the sum of yourself and a flirt-gill.
 \tWe must return to scene III."""
 
+# The data is now in correct order on Montague. We loop through it (just like
+# the last code block did) and move it back on Capulet. We need to do this,
+# because we will later need a second copy of the data.
+# For each symbol on the stack, we generate the lines that added it to the
+# stack in the data section. This is done in a later section of the code
+# (act III), where we jump to for each symbol. The code in act III prints the
+# lines and then returns to the start of the loop (act II).
+# Again, the data is moved to Capulet and is reversed in the process, and
+# again, Juliet counts elements on Capulet but is copied before the loop rather
+# than incremented in the loop.
 CODE_PRINT_DATA_LOOP = """
 \t\tScene IV: Romeo's answer.
 
@@ -193,6 +210,11 @@ Capulet:
 \tYou are as smelly as the sum of yourself and a wolf.
 \tWe shall proceed to act III."""
 
+# === Printing the Code Section ===
+# The data contains the encoded code section, so to print the code section, we
+# need to loop the data again and this time just print every symbol.
+# As before, we have the data on Capulet in reversed order, so we have to
+# reverse it before we can print it.
 CODE_PRINT_CODE_SETUP = """
 \t\tScene II: Juliet's answer.
 
@@ -224,7 +246,8 @@ Montague:
 \tYou are as smelly as the sum of yourself and a flirt-gill.
 \tWe must return to scene III."""
 
-
+# Now the data is ordered correctly, and we can loop through it to print it.
+# This time, we don't need the data after the loop, so we do not copy it again.
 CODE_PRINT_CODE_LOOP = """
 \t\tScene IV: Montague loses it.
 
@@ -243,6 +266,14 @@ Montague:
 \tYou are as rotten as the sum of yourself and the plague.
 \tWe must return to scene IV."""
 
+# === Utility Code Section ===
+# The utility section is part of the code section and works like a method that
+# generates the code in the data section for one symbol at a time.
+# Whenever we jump to this act, Romeo and Capulet are on stage and Montague's
+# value is the one we want to generate the push-command for.
+# We use Romeo to print some stuff and as a temporary copy of Montague, so
+# first we store his current value on his stack. We will restore it just before
+# returning to the print loop (act II).
 UTILITY_PRINT_PUSH_COMMAND_START = """
 
 \t\t\tAct III: Meta Play.
@@ -251,49 +282,62 @@ UTILITY_PRINT_PUSH_COMMAND_START = """
 
 Capulet:
 \tRemember yourself."""
-#<auto>
-#Juliet:
-#\tRemember
-#</auto>
+
+# === Generated block: Printing the start of the push command ===
+# Every push command starts and ends in the same way (DATA_PUSH_COMMAND_BEFORE
+# and DATA_PUSH_COMMAND_AFTER), so we first print DATA_PUSH_COMMAND_BEFORE.
+# The generated lines will alternate assignments ("You are as ... as ..") and
+# print statements ("Speak your mind.") to print DATA_PUSH_COMMAND_BEFORE.
+
+# We then jump to a scene that prints the number literal. This is a big
+# switch-case statement over Montague's value which we temporarily store in
+# Romeo.
 UTILITY_SWITCH_CASE_START = "\tYou are as villainous as Montague."
-#<auto>
-#\tAre you as good as <spl code of a>
-#\tIf so let us proceed to scene <scene of a>
-#\t...
-#</auto>
 
+# === Generated block: switch-case ===
+# The switch-case statement checks the current value of Romeo against every
+# number where we have a literal definition. We then jump to the scene that
+# prints the literal.
+# The code generated here will alternate between value tests ("Are you as good
+# as ...") and conditional goto statements ("If so let us proceed to scene ...")
 
+# Every scene that prints a number literal will return to scene II in the end,
+# where we print DATA_PUSH_COMMAND_AFTER and return to act II to continue the
+# main loop.
 UTILITY_SWITCH_CASE_END = """
 \t\tScene II: More accusations.
 
 Capulet:"""
 
-#<auto>
-#\n
-#Capulet:
-#\tYou are as worried as the sum of yourself and the son.
-#</auto>
+# === Generated block: Printing the end of the push command ===
+# The lines generated here will alternate assignments ("You are as ... as ..")
+# and print statements ("Speak your mind.") to print DATA_PUSH_COMMAND_AFTER.
 
-
+# After we printed DATA_PUSH_COMMAND_AFTER, we return to the main loop. Before
+# that, we have to restore Romeo's original value from his stack.
 UTILITY_PRINT_PUSH_COMMAND_END = """
 \tRecall everything I told you.
 \tWe shall return to act II.
 """
 
-UTILITY_PRINT_CHARACTER_START = """
+# === Generated block: Printing a number literal ===
+# We have one scene for each number literal which will use alternating
+# assignments ("You are as ... as ..") and print statements ("Speak your
+# mind.") to print every symbol used in the literal.
+# Each such scene starts with the following lines
+UTILITY_PRINT_LITERAL_START = """
 
-\t\tScene %s: Even more accusations."""
-UTILITY_PRINT_CHARACTER_ACTORS = ["Capulet"]
-#<auto>
-#\tScene __: Even more accusations.
-#
-#Capulet:\n
-# for char in "<spl code of a>"
-#\tYou are as good as <spl code of char>.
-#\tSpeak your mind.
-#</auto>
-UTILITY_PRINT_CHARACTER_END = "\tLet us return to scene II."
+\t\tScene %s: Even more accusations.
 
+Capulet:"""
+# At the end of each scene, we return to scene II, which prints
+# DATA_PUSH_COMMAND_AFTER and returns to the main loop.
+UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."
+
+# === Final Code Section ===
+# After the utility section, we have one final label that is used to end the
+# program after the main loop. Nothing happens here, except everyone leaving
+# the stage.
 CODE_END_OF_PROGRAM = """
 \t\t\tAct IV: Fin.
 
@@ -303,32 +347,33 @@ CODE_END_OF_PROGRAM = """
 """
 
 
-
-# We need strings for numbers to stay constant in some places,
-# because we have to write code that prints SPL code that will print certain symbols.
-
+# =============== NUMBER LITERAL DEFINITIONS ===============
+#
+# We need strings for numbers to stay constant in some places, because we have
+# to write code that prints SPL code that will print certain symbols.
+#
 # We only define constant numbers literals for the symbols we need:
-#  \t       9
-#  \n      10
-#  (space) 32
-#  '       39
-#  ,       44
-#  -       45
-#  .       46
-#  0-9     48-57
-#  :       58
-#  ?       63
-#  A-Z     65-90
-#  [       91
-#  ]       93
-#  a-z     97-122
-
+#     \t       9
+#     \n      10
+#     (space) 32
+#     '       39
+#     ,       44
+#     -       45
+#     .       46
+#     0-9     48-57
+#     :       58
+#     ?       63
+#     A-Z     65-90
+#     [       91
+#     ]       93
+#     a-z     97-122
+#
 # To keep the strings short, we also assume that some variables have certain values
 # Friar Laurence  64
 # Friar John     113
 # The Apothecary   3
 
-NUMBERS = {
+LITERALS = {
     9:   "the square of the Apothecary",
     10:  "the sum of a rural cow and a furry large white horse",
     # 11 - 31 not needed

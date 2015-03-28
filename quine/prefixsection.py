@@ -1,4 +1,4 @@
-from .handwritten import PREFIX_TITLE, PREFIX_DRAMATIS_PERSONAE, PREFIX_SETUP
+from . import handwritten
 
 
 def generate():
@@ -14,9 +14,9 @@ def generate():
     :return: a string containing the full source code for the prefix.
     """
     code_lines = [
-        PREFIX_TITLE,
-        PREFIX_DRAMATIS_PERSONAE,
-        PREFIX_SETUP
+        handwritten.PREFIX_TITLE,
+        handwritten.PREFIX_DRAMATIS_PERSONAE,
+        handwritten.PREFIX_SETUP
     ]
     return "\n".join(code_lines)
 

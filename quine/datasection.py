@@ -1,4 +1,4 @@
-from .handwritten import NUMBERS, DATA_PUSH_COMMAND_BEFORE, DATA_PUSH_COMMAND_AFTER
+from . import handwritten
 
 
 def generate(code):
@@ -10,10 +10,11 @@ def generate(code):
 
     :return: a string containing the full source code for the data section.
     """
-    code_lines = []
-    for symbol in code:
-        push_command = (DATA_PUSH_COMMAND_BEFORE
-                        + NUMBERS[ord(symbol)]
-                        + DATA_PUSH_COMMAND_AFTER)
-        code_lines.append(push_command)
+    code_lines = [generate_push_command(symbol) for symbol in code]
     return "\n".join(code_lines)
+
+
+def generate_push_command(symbol):
+    return handwritten.DATA_PUSH_COMMAND_BEFORE \
+        + handwritten.LITERALS[ord(symbol)] \
+        + handwritten.DATA_PUSH_COMMAND_AFTER
