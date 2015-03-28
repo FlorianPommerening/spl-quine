@@ -3,6 +3,9 @@ import random
 
 from . import tokens
 
+# TODO: Fixed seed for testing
+random.seed(0)
+
 
 def assignment_command(value):
     command = random.choice(tokens.ASSIGNMENT_COMMANDS)
