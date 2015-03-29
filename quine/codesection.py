@@ -33,10 +33,10 @@ def generate(prefix):
     code_lines += generate_utility_section()
     code_lines += generate_final_section()
     code_so_far = "\n".join(code_lines)
-    length_of_code = len(code_so_far)
+    length_of_code = len(code_so_far) + len(handwritten.CODE_WRITE_CODE_SIZE)
     assign_length_code = spl.randomized.assign_number_command(length_of_code)
     remaining_code = shorten_code(code_so_far, len(assign_length_code))
-    code = assign_length_code + remaining_code
+    code = handwritten.CODE_WRITE_CODE_SIZE + assign_length_code + remaining_code
     assert(len(code) == length_of_code)
     return code
 
@@ -98,7 +98,7 @@ def shorten_code(code, reduce_by):
     target_length = len(code) - reduce_by
     while len(code) > target_length:
         l = random.choice(useful_lengths)
-        replace_from = random.choice(positive_adjectives_by_length[l])
-        replace_to = random.choice(positive_adjectives_by_length[l-1])
+        replace_from = " %s " % random.choice(positive_adjectives_by_length[l])
+        replace_to = " %s " % random.choice(positive_adjectives_by_length[l-1])
         code = re.sub(replace_from, replace_to, code, count=1)
     return code
