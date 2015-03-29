@@ -59,6 +59,8 @@ Friar John:
 
 [Exeunt]
 [Enter Capulet and Juliet]
+
+Juliet:
 """
 
 # =============== DATA SECTION ===============
@@ -69,18 +71,14 @@ Friar John:
 # recreate the data block and then to recreate the code block.
 # For each letter in the code block, the data block contains one line that
 # pushes the ascii code of that letter on the reversed data stack.
+# We do not count the elements on the stack. Instead, we write the total number
+# of elements to Juliet in the code.
 
 # To push a letter on the stack, Juliet tells Capulet to remember this letter:
-DATA_PUSH_COMMAND_BEFORE = """Juliet:
-\tRemember """
-# Capulet then responds with a command that increases the value to Juliet to
-# count the new item (Note that the "." that ends Juliet's sentence):
-DATA_PUSH_COMMAND_AFTER = """.
-Capulet:
-\tYou are as worried as the sum of yourself and the son.
-"""
+DATA_PUSH_COMMAND_BEFORE = "\tRemember "
+DATA_PUSH_COMMAND_AFTER = ".\n"
 
-# These two commands are repeated until all data is on Capulet in reversed order.
+# This command is repeated until all data is on Capulet in reversed order.
 
 # =============== CODE SECTION ===============
 
@@ -96,7 +94,16 @@ Capulet:
 #    encodes the code section (which we can do, because the code section is
 #    independent of the data section), this will recreate the code.
 
-# We start by printing the prefix.
+# We start by setting Juliet to the number of items on the stack.
+# This is part of the code, but need to know the size of the code.
+# See codesection.py for details.
+
+CODE_WRITE_CODE_SIZE = """
+Capulet:
+\tYou are nothing.
+"""
+
+# Next, we print the prefix.
 # Juliet and Capulet already had their big scene, so we get Montague on stage.
 # We can use both of the stack characters (Montague and Capulet) for output
 # here without risk of losing their data, because their data is on their stack,
