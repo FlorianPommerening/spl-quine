@@ -417,6 +417,12 @@ CODE_END_OF_PROGRAM = """
 # Paris            8
 # Tybalt          32
 
+# TODO: We commented out symbols we do not use (like numbers and upper
+#       case letters). Instead, it would be nicer to only include the
+#       symbols we use in the code. This is a dependency loop, which we
+#       could break by adding symbols on demand and recreating the code
+#       every time we add a symbol until we added enough symbols to
+#       print everything we use.
 LITERALS = {
     9:   "the square of the Apothecary",
     10:  "the sum of a rural cow and Paris",
@@ -430,17 +436,17 @@ LITERALS = {
          "and the Apothecary",
     46:  "the sum of Friar Laurence and the sum of the cursed half-witted damned distasteful flirt-gill "
          "and the snotty leech",
-    # 47 not needed
-    48:  "twice the product of the Apothecary and Paris",
-    49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
-    50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
-    51:  "the sum of a peaceful chihuahua and the square of the difference between Paris and the wind",
-    52:  "the difference between Friar Laurence and the sum of Paris and a amazing sunny summer's day",
-    53:  "the sum of the cube of the Apothecary and the difference between the cube of the Apothecary and a hero",
-    54:  "the difference between Friar Laurence and the sum of Paris and a handsome hero",
-    55:  "the difference between Friar Laurence and the sum of Paris and a cat",
-    56:  "the difference between Friar Laurence and Paris",
-    57:  "the sum of the difference between Friar Laurence and Paris and a hair",
+    # 47 - 57 not needed
+#    48:  "twice the product of the Apothecary and Paris",
+#    49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
+#    50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
+#    51:  "the sum of a peaceful chihuahua and the square of the difference between Paris and the wind",
+#    52:  "the difference between Friar Laurence and the sum of Paris and a amazing sunny summer's day",
+#    53:  "the sum of the cube of the Apothecary and the difference between the cube of the Apothecary and a hero",
+#    54:  "the difference between Friar Laurence and the sum of Paris and a handsome hero",
+#    55:  "the difference between Friar Laurence and the sum of Paris and a cat",
+#    56:  "the difference between Friar Laurence and Paris",
+#    57:  "the sum of the difference between Friar Laurence and Paris and a hair",
     58:  "the sum of the difference between Friar Laurence and Paris and a rural pony",
     # 59 - 62 not needed
     63:  "the sum of Friar Laurence and the devil",
@@ -448,14 +454,14 @@ LITERALS = {
     65:  "the sum of Friar Laurence and a road",
     66:  "the sum of the clearest sky and Friar Laurence",
     67:  "the sum of the sum of a furry grandmother and a grandfather and Friar Laurence",
-    68:  "the sum of Friar Laurence and a normal old road",
+#    68:  "the sum of Friar Laurence and a normal old road",
     69:  "the sum of a squirrel and the sum of Friar Laurence and a furry old pony",
     70:  "the sum of Friar Laurence and the sum of a bottomless large nose and a healthy tree",
-    71:  "the sum of Friar Laurence and the difference between Paris and a roman",
+#    71:  "the sum of Friar Laurence and the difference between Paris and a roman",
     72:  "the difference between Paris and a foul fatherless infected dirty oozing rotten leech",
     73:  "the sum of the sum of Paris and a cat and Friar Laurence",
     74:  "the sum of Paris and the sum of a lovely sky and Friar Laurence",
-    75:  "the sum of Paris and the sum of Friar Laurence and the Apothecary",
+#    75:  "the sum of Paris and the sum of Friar Laurence and the Apothecary",
     76:  "the sum of Friar Laurence and the difference between a normal black good smooth road "
          "and the reddest green rose",
     77:  "the sum of Friar Laurence and the difference between a brave charming handsome cute hero and the Apothecary",
@@ -463,7 +469,7 @@ LITERALS = {
          "and Friar Laurence",
     79:  "the sum of Friar Laurence and the sum of a fair amazing beautiful fine angel and a hog",
     80:  "the difference between Friar Laurence and a dirty fat-kidneyed misused smelly flirt-gill",
-    81:  "the difference between Friar John and Tybalt",
+#    81:  "the difference between Friar John and Tybalt",
     82:  "the sum of Friar Laurence and the sum of a big mighty old gentle squirrel and a healthy door",
     83:  "the sum of a beautiful large blossoming green mistletoe and the sum of Friar Laurence and the Apothecary",
     84:  "the sum of Friar Laurence and the sum of the mighty fine joy and the huge pretty amazing sweet happiness",
@@ -473,7 +479,7 @@ LITERALS = {
     88:  "the sum of Friar Laurence and the difference between a big loving rich trustworthy aunt "
          "and a evil smelly villainous hound",
     89:  "the sum of the Apothecary and the difference between Friar John and the cube of the Apothecary",
-    90:  "the sum of the difference between Friar John and the cube of the Apothecary and a golden furry hair",
+#    90:  "the sum of the difference between Friar John and the cube of the Apothecary and a golden furry hair",
     91:  "the sum of Friar Laurence and the cube of the Apothecary",
     # 92 not needed
     93:  "the sum of Friar Laurence and the difference between Tybalt and the Apothecary",
