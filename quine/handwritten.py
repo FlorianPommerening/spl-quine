@@ -367,7 +367,7 @@ Paris:
 [Enter Tybalt]
 
 Paris:
-\tYou are the product of your charming loving mother and a big old blossoming tree.
+\tYou are as damned as the product of your charming loving mother and a big old blossoming tree.
 
 [Exeunt]
 [Enter Capulet and Juliet]
