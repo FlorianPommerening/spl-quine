@@ -80,6 +80,9 @@ def generate_utility_section():
             spl.randomized.print_statements(literal, handwritten.LITERALS),
             handwritten.UTILITY_PRINT_LITERAL_END
         ]
+    code_lines += [
+        handwritten.UTILITY_INITIALIZE_CONSTANTS,
+    ]
     return code_lines
 
 
