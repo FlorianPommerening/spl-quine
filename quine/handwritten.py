@@ -20,6 +20,7 @@ PREFIX_TITLE = "An Epic Never-Ending Saga."
 #    The Apothecary, constant 3 for shorter number strings.
 #    Friar John, constant 113 for shorter number strings.
 #    Friar Laurence, constant 64 for shorter number strings.
+#    Paris, constant 8 for shorter number strings.
 # We also sometimes use variables for other purposes temporarily. This will be
 # explained at the relevant code snippets.
 PREFIX_DRAMATIS_PERSONAE = """
@@ -30,6 +31,7 @@ Juliet, his daughter, always remembering where he put his stuff.
 The Apothecary, a triple split personality.
 Friar John, just a number in His herd.
 Friar Laurence, wields the power the loving mighty noble Lord.
+Paris, a proud rich noble Lord.
 """
 
 # In the initial setup, we set the values of our constants and then get
@@ -51,10 +53,13 @@ Friar Laurence:
 \tYou are as lovely as the sum of myself and the square of the difference
 \tbetween the sweetest clearest pretty face and a rose.
 
-[Exit Friar Laurence]
-[Enter the Apothecary]
+[Exeunt]
+[Enter Paris and the Apothecary]
 
-Friar John:
+The Apothecary:
+\tYou are a proud rich noble Lord.
+
+Paris:
 \tThou art as trustworthy as the sum of a cunning roman and a cat.
 
 [Exeunt]
@@ -382,7 +387,7 @@ CODE_END_OF_PROGRAM = """
 
 LITERALS = {
     9:   "the square of the Apothecary",
-    10:  "the sum of a rural cow and a furry large white horse",
+    10:  "the sum of a rural cow and Paris",
     # 11 - 31 not needed
     32:  "an amazing beautiful blossoming tiny purple flower",
     # 33 - 38 not needed
@@ -397,16 +402,16 @@ LITERALS = {
     48:  "the sum of Friar Laurence and a foul rotten smelly villainous toad",
     49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
     50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
-    51:  "the sum of a peaceful chihuahua and the square of the difference between a normal red fair morning "
+    51:  "the sum of a peaceful chihuahua and the square of the difference between Paris "
          "and the wind",
-    52:  "the difference between Friar Laurence and the sum of a charming noble pretty angel "
+    52:  "the difference between Friar Laurence and the sum of Paris "
          "and a amazing sunny summer's day",
     53:  "the sum of the cube of the Apothecary and the difference between the cube of the Apothecary and a hero",
-    54:  "the difference between Friar Laurence and the sum of the brave healthy noble Lord and a handsome hero",
-    55:  "the difference between Friar Laurence and the sum of a happy cute gentle pony and a cat",
+    54:  "the difference between Friar Laurence and the sum of Paris and a handsome hero",
+    55:  "the difference between Friar Laurence and the sum of Paris and a cat",
     56:  "the sum of Friar Laurence and a foul rotten oozing beggar",
-    57:  "the sum of the difference between Friar Laurence and a brave mighty proud hero  and a hair",
-    58:  "the sum of the difference between Friar Laurence and a mighty noble brave King and a rural pony",
+    57:  "the sum of the difference between Friar Laurence and Paris and a hair",
+    58:  "the sum of the difference between Friar Laurence and Paris and a rural pony",
     # 59 - 62 not needed
     63:  "the sum of Friar Laurence and the devil",
     # 64 not needed
@@ -416,11 +421,11 @@ LITERALS = {
     68:  "the sum of Friar Laurence and a normal old road",
     69:  "the sum of a squirrel and the sum of Friar Laurence and a furry old pony",
     70:  "the sum of Friar Laurence and the sum of a bottomless large nose and a healthy tree",
-    71:  "the sum of Friar Laurence and the difference between a black yellow blue cat and a roman",
-    72:  "the difference between a fair golden beautiful angel "
+    71:  "the sum of Friar Laurence and the difference between Paris and a roman",
+    72:  "the difference between Paris "
          "and a foul fatherless infected dirty oozing rotten leech",
-    73:  "the sum of the sum of a normal tiny red pony and a cat and Friar Laurence",
-    74:  "the sum of a golden yellow sunny lantern and the sum of a lovely sky and Friar Laurence",
+    73:  "the sum of the sum of Paris and a cat and Friar Laurence",
+    74:  "the sum of Paris and the sum of a lovely sky and Friar Laurence",
     75:  "the sum of a mighty sunny trustworthy kingdom and the sum of Friar Laurence and the Apothecary",
     76:  "the sum of Friar Laurence and the difference between a normal black good smooth road "
          "and the reddest green rose",
@@ -449,7 +454,7 @@ LITERALS = {
     98:  "the sum of a red furry cute loving pretty cat and the sum of Friar Laurence and the bluest sky",
     99:  "the sum of Friar Laurence and the sum of the large sunny peaceful happy proud kingdom and the Apothecary",
     100: "the sum of Friar Laurence and the sum of the amazing fine bold brave charming king "
-         "and the mighty noble hero",
+         "and the brave noble hero",
     101: "the sum of Friar John and the sum of a horrible stinking smelly codpiece and a hairy dusty hog",
     102: "the sum of the cursed foul infected blister and the difference between Friar John and the Apothecary",
     103: "the difference between Friar John and the sum of a delicious healthy sweet horse and a normal cat",
@@ -457,7 +462,7 @@ LITERALS = {
     105: "the sum of a villainous lying dirty bastard and Friar John",
     106: "the sum of a snotty oozing fat-kidneyed flirt-gill and the sum of a plum and Friar John",
     107: "the difference between Friar John and the sum of a tiny old proud chihuahua and a cowardly goat",
-    108: "the sum of Friar John and the difference between the Apothecary and a furry green tiny hamster",
+    108: "the sum of Friar John and the difference between the Apothecary and Paris",
     109: "the sum of Friar John and an infected stinking bastard",
     110: "the difference between Friar John and the Apothecary",
     111: "the difference between Friar John and a furry animal",
