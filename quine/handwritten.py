@@ -423,7 +423,7 @@ LITERALS = {
     # 11 - 31 not needed
     32:  "Tybalt",
     # 33 - 38 not needed
-    39:  "the sum of the Apothecary and the sum of the peaceful sunny moon and Tybalt",
+    39:  "the sum of Tybalt and the sum of Paris and his hate",
     # 40 - 43 not needed
     44:  "the difference between Friar Laurence and the sum of a healthy happy cute tiny pony and a beautiful red rose",
     45:  "the difference between Friar Laurence and the sum of a amazing golden lovely blossoming summer's day "
@@ -431,7 +431,7 @@ LITERALS = {
     46:  "the sum of Friar Laurence and the sum of the cursed half-witted damned distasteful flirt-gill "
          "and the snotty leech",
     # 47 not needed
-    48:  "the sum of Friar Laurence and a foul rotten smelly villainous toad",
+    48:  "twice the product of the Apothecary and Paris",
     49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
     50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
     51:  "the sum of a peaceful chihuahua and the square of the difference between Paris and the wind",
@@ -439,7 +439,7 @@ LITERALS = {
     53:  "the sum of the cube of the Apothecary and the difference between the cube of the Apothecary and a hero",
     54:  "the difference between Friar Laurence and the sum of Paris and a handsome hero",
     55:  "the difference between Friar Laurence and the sum of Paris and a cat",
-    56:  "the sum of Friar Laurence and a foul rotten oozing beggar",
+    56:  "the difference between Friar Laurence and Paris",
     57:  "the sum of the difference between Friar Laurence and Paris and a hair",
     58:  "the sum of the difference between Friar Laurence and Paris and a rural pony",
     # 59 - 62 not needed
@@ -455,7 +455,7 @@ LITERALS = {
     72:  "the difference between Paris and a foul fatherless infected dirty oozing rotten leech",
     73:  "the sum of the sum of Paris and a cat and Friar Laurence",
     74:  "the sum of Paris and the sum of a lovely sky and Friar Laurence",
-    75:  "the sum of a Paris and the sum of Friar Laurence and the Apothecary",
+    75:  "the sum of Paris and the sum of Friar Laurence and the Apothecary",
     76:  "the sum of Friar Laurence and the difference between a normal black good smooth road "
          "and the reddest green rose",
     77:  "the sum of Friar Laurence and the difference between a brave charming handsome cute hero and the Apothecary",
@@ -478,15 +478,15 @@ LITERALS = {
     # 92 not needed
     93:  "the sum of Friar Laurence and the difference between Tybalt and the Apothecary",
     # 94 - 96 not needed
-    97:  "the difference between Friar John and the old rural loving red lantern",
+    97:  "the difference between Friar John and twice Paris",
     98:  "the sum of Tybalt and the sum of Friar Laurence and the bluest sky",
     99:  "the sum of Friar Laurence and the sum of Tybalt and the Apothecary",
-    100: "the sum of Friar Laurence and the sum of Tybalt and the brave noble hero",
+    100: "the square of the sum of Paris and his brave hero",
     101: "the sum of Friar John and the sum of a horrible stinking smelly codpiece and a hairy dusty hog",
     102: "the sum of the cursed foul infected blister and the difference between Friar John and the Apothecary",
     103: "the difference between Friar John and the sum of a delicious healthy sweet horse and a normal cat",
     104: "the sum of the sum of a beggar and Friar John and a half-witted disgusting sorry coward",
-    105: "the sum of a villainous lying dirty bastard and Friar John",
+    105: "the difference between Friar John and Paris",
     106: "the sum of a snotty oozing fat-kidneyed flirt-gill and the sum of a plum and Friar John",
     107: "the difference between Friar John and the sum of a tiny old proud chihuahua and a cowardly goat",
     108: "the sum of Friar John and the difference between the Apothecary and Paris",
@@ -502,6 +502,6 @@ LITERALS = {
     118: "the difference between Friar John and the sum of a fatherless vile devil and the Hell",
     119: "the sum of Friar John and the sum of the clearest sweetest summer's day and the reddest rose",
     120: "the sum of a black bottomless face and the sum of Friar John and the Apothecary",
-    121: "the sum of Friar John and a smooth old rural stone wall",
+    121: "the sum of Friar John and Paris",
     122: "the difference between twice Friar Laurence and the sum of a tiny old town and a large tree",
 }
