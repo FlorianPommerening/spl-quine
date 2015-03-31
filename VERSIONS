@@ -39,7 +39,7 @@ The list of omitted literals is hardcoded, however.
 
 === v1.3 ===
 
-Lines of code: ~327 thousand
+Lines of code: ~337 thousand
 Time to translate to c: ~30 minutes
 Time to compile: ~15 minutes
 Memory required to compile: ~8.5 GB

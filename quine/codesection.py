@@ -81,7 +81,10 @@ def generate_utility_section(used_characters):
                    spl.tokens.ADJECTIVES):
         for token in tokens:
             used_characters |= set(token)
+    # Remove '%' (from templates)
     used_characters -= set("%")
+    # Add roman numerals (for new scene numbers)
+    used_characters |= set("IVXL")
 
     while True:
         additional_characters = set()
