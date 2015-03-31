@@ -171,7 +171,7 @@ Venus:
 CODE_PRINT_DATA_LOOP = """
 
 
-\t\tAct III: Output.
+\t\tAct III: Loopy Thoughts.
 
 \t\tScene I: Retaliation.
 
@@ -204,7 +204,7 @@ Venus:
 \tAre you as good as nothing?
 \tIf so, we must proceed to act VI.
 \tSpeak your mind.
-\tWe must return to scene II."""
+\tLet us return to scene II."""
 
 # === Utility Code Section ===
 # The utility section is part of the code section and works like a method that
@@ -255,7 +255,7 @@ Pinch:"""
 
 # After we printed DATA_PUSH_COMMAND_AFTER, we return to the main loop.
 UTILITY_PRINT_PUSH_COMMAND_END = """
-\tWe shall return to act III.
+\tLet us return to act III.
 """
 
 # === Generated block: Printing a number literal ===
@@ -274,9 +274,9 @@ UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."
 
 
 UTILITY_INITIALIZE_CONSTANTS = """
-\t\t\tAct V: Constant Talking.
+\t\t\tAct V: Perpetual Talking.
 
-\t\tScene I: Unchanging Insults.
+\t\tScene I: Immutable Insults.
 
 [Exeunt]
 [Enter Puck and Viola]
@@ -306,7 +306,7 @@ Page:
 [Enter Venus and Paris]
 
 Paris:
-\tWe shall return to act II.
+\tLet us return to act II.
 """
 
 # === Final Code Section ===
@@ -319,8 +319,8 @@ CODE_END_OF_PROGRAM = """
 \t\tScene I: Lap of Honour.
 
 Venus:
-\tRemember the mighty fine joy. Recall that this quine was written by
-\tFlorian Pommerening and Thomas Mayer.
+\tRemember a thing. Recall that this play was written by
+\t\tFlorian Pommerening and Thomas Mayer.
 
 [Exeunt]
 """
@@ -409,7 +409,7 @@ LITERALS = {
     81:  "the difference between Puck and Ford",
     82:  "the sum of Viola and the sum of a big mighty old gentle squirrel and a healthy door",
     83:  "the sum of a beautiful large blossoming green mistletoe and the sum of Viola and Ajax",
-    84:  "the sum of Viola and the sum of the mighty fine joy and the huge pretty amazing sweet happiness",
+    84:  "the sum of Viola and the sum of the mighty fine hero and the huge pretty amazing sweet happiness",
     85:  "the difference between Puck and the sum of the cube of Ajax and a flower",
     86:  "the difference between Puck and the cube of Ajax",
     87:  "the sum of an angel and the difference between Puck and the cube of Ajax",
