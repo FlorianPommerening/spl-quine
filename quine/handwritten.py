@@ -383,7 +383,11 @@ Juliet:
 CODE_END_OF_PROGRAM = """
 \t\t\tAct VI: Fin.
 
-\t\tScene I: No questions left.
+\t\tScene I: Lap of Honour.
+
+Romeo:
+\tRemember the mighty fine joy. Recall that this quine was written by
+\tFlorian Pommerening and Thomas Mayer.
 
 [Exeunt]
 """
