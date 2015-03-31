@@ -1,0 +1,51 @@
+=== v1.0 ===
+
+Lines of code: ~3.1 million
+Time to translate to c: ~1 day
+Time to compile: ~4 hours
+Memory required to compile: ~56 GB
+
+Our first version of this quine is also the most verbose (and arguably
+the most beautiful). The main reason for its size is that we keep track
+of the current size of the data stack, increasing a variable for each
+push operation.
+
+
+=== v1.1 ===
+
+Lines of code: ~781 thousand
+Time to translate to c: ~4.5 hours
+Time to compile: ~1 hour
+Memory required to compile: ~20 GB
+
+Version 1.1 removes the need to keep track of the number of items on the
+stack by counting the size of the code in the bootstraper and including
+an assignment operation in the code block. Since this changes the size
+of the code block, we carve out the required space by replacing random
+adjectives with smaller ones.
+
+
+=== v1.2 ===
+
+Lines of code: ~483 thousand
+Time to translate to c: ~1 hour
+Time to compile: ~30 minutes
+Memory required to compile: ~13 GB
+
+This version uses more constants to have shorter strings for literals.
+It also omits some literals that are not used in the code from the
+utility section (specifically: all number and some upper case letters).
+The list of omitted literals is hardcoded, however.
+
+=== v1.3 ===
+
+Lines of code: ~327 thousand
+Time to translate to c: ~30 minutes
+Time to compile: ~15 minutes
+Memory required to compile: ~8.5 GB
+
+This version uses end-of-stack symbols instead of coding the code length
+into the code. It also decides automatically which literals to include
+in the quine. This means it is now easier to save code by avoiding some
+letters in the whole code. We also use shorter variable names to bring
+the code size down.
