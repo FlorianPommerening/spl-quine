@@ -44,30 +44,30 @@ def switch_statement(number_scenes):
     return "\n".join(code_lines)
 
 
-def print_statements(text, literals, actors=None):
+def print_statements(text, literals, characters=None):
     """
     Generate randomized SPL code to print the given text letter by letter.
     :param text: the text to print
     :param literals: dictionary mapping ascii codes to shakespeare literals.
-    :param actors: the actors that should say the print line. If None, we
-                   assume the actor is already talking and add no line to
-                   indicate the actor. Otherwise, the list must contain either
-                   one actor whose line is added before all the print
-                   statements, or two actors who will take turns printing the
+    :param characters: the characters that should say the print line. If None, we
+                   assume the character is already talking and add no line to
+                   indicate the character. Otherwise, the list must contain either
+                   one character whose line is added before all the print
+                   statements, or two characters who will take turns printing the
                    text.
     :return: a string containing code statements to print the text.
     """
     code_lines = []
-    if actors is None:
-        actors = [None]
-    elif len(actors) == 1:
-        code_lines = [actors[0] + ":"]
+    if characters is None:
+        characters = [None]
+    elif len(characters) == 1:
+        code_lines = [characters[0] + ":"]
     else:
-        assert len(actors) == 2
+        assert len(characters) == 2
 
-    for actor, symbol in zip(itertools.cycle(actors), text):
-        if len(actors) > 1:
-            code_lines += [actor + ":"]
+    for character, symbol in zip(itertools.cycle(characters), text):
+        if len(characters) > 1:
+            code_lines += [character + ":"]
         number = literals[ord(symbol)]
         code_lines += ["\t" + assign_value_command(number)]
         code_lines += ["\t" + print_char_command()]

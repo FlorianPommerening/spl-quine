@@ -49,7 +49,8 @@ def generate(prefix):
 def generate_print_prefix(prefix):
     return "\n".join([
         handwritten.CODE_PRINT_PREFIX_START,
-        spl.randomized.print_statements(prefix, handwritten.LITERALS, handwritten.CODE_PRINT_PREFIX_ACTORS),
+        spl.randomized.print_statements(prefix, handwritten.LITERALS,
+                                        handwritten.CODE_PRINT_PREFIX_CHARACTERS),
         handwritten.CODE_PRINT_PREFIX_END,
     ])
 
@@ -62,10 +63,7 @@ def generate_print_data():
 
 
 def generate_print_code():
-    return "\n".join([
-        handwritten.CODE_PRINT_CODE_SETUP,
-        handwritten.CODE_PRINT_CODE_LOOP,
-    ])
+    return handwritten.CODE_PRINT_CODE_LOOP
 
 
 def generate_utility_section(used_characters):

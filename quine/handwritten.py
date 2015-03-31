@@ -11,35 +11,39 @@
 PREFIX_TITLE = "An Epic Never-Ending Saga."
 
 # Variable definition. We use the following variables:
+#    Paris, the main data stack will contain all data in correct order,
+#              i.e., the first letter will be at the top of his stack.
 #    Pinch, the main data stack will contain all data in correct order,
-#              i.e., the first character will be at the top of his stack.
+#              i.e., the first letter will be at the top of his stack.
 #    Venus, the reverse data stack will contain all data in reverse order,
-#             i.e., the first character will be at the bottom of his stack.
-#    Paris, counts the current number of entries on Venus.
+#             i.e., the first letter will be at the bottom of his stack.
 #    Ajax, constant 3 for shorter number strings.
-#    Puck, constant 113 for shorter number strings.
-#    Viola, constant 64 for shorter number strings.
 #    Page, constant 8 for shorter number strings.
 #    Ford, constant 32 for shorter number strings.
+#    Viola, constant 64 for shorter number strings.
+#    Puck, constant 113 for shorter number strings.
 # We also sometimes use variables for other purposes temporarily. This will be
 # explained at the relevant code snippets.
 PREFIX_DRAMATIS_PERSONAE = """
-Pinch, a stacky person.
-Venus, the plain opposite of Pinch.
-Paris, his daughter, always remembering where he put his stuff.
+Paris, a stacky person.
+Pinch, impersonates Paris.
+Venus, the opposite of Paris and Pinch.
 Ajax, a triple split personality.
-Puck, just a number in His herd.
-Viola, wields the power the loving mighty noble Lord.
 Page, a proud rich noble Lord.
 Ford, helps out with nothing.
+Viola, is twice as brave as Ford.
+Puck, a random bystander.
 """
 
 # In the initial setup, we set the values of our constants and then get
 # Venus and Paris on stage to define the data stack.
 # We define the stack in order and push it on the stack letter by letter,
 # so the data will be in reverse order and we have to use Venus instead of
-# Pinch.
-# TODO: moving the constant definition into the code section and jumping there from here might save some lines.
+# Paris or Pinch.
+# The constant definition is outsourced to act V to keep the prefix small.
+# Act V will define the constants and then jump to act II.
+# In act II we initialize the stack with 0 which we will later use as an
+# end-of-stack symbol.
 PREFIX_SETUP = """
 \t\t\tAct I: Prelude.
 
@@ -63,13 +67,11 @@ Paris:
 # =============== DATA SECTION ===============
 
 # === Generated block: Data definition ===
-# The next couple of million lines will be automatically generated. They push
-# data on the stack (Venus) that will later be used by the code block to
-# recreate the data block and then to recreate the code block.
+# The next couple of lines make up 99% of the quine and will be automatically
+# generated. They push data on the stack (Venus) that will later be used by
+# the code block to recreate the data block and then to recreate the code block.
 # For each letter in the code block, the data block contains one line that
 # pushes the ascii code of that letter on the reversed data stack.
-# We do not count the elements on the stack. Instead, we write the total number
-# of elements to Paris in the code.
 
 # To push a letter on the stack, Paris tells Venus to remember this letter:
 DATA_PUSH_COMMAND_BEFORE = "\tRemember "
@@ -93,9 +95,9 @@ DATA_PUSH_COMMAND_AFTER = ".\n"
 
 # First, we print the prefix.
 # Paris and Venus already had their big scene, so we get Pinch on stage.
-# We can use both of the stack characters (Pinch and Venus) for output
-# here without risk of losing their data, because their data is on their stack,
-# not their current value.
+# We can use the stack characters (Pinch and Venus) for output here without the
+# risk of losing their data, because their data is on their stack, not their
+# current value.
 
 CODE_PRINT_PREFIX_START = """
 [Exit Paris]
@@ -109,7 +111,7 @@ CODE_PRINT_PREFIX_START = """
 # === Generated block: Printing the Prefix Section ===
 # Here we just go through the prefix section letter by letter, assign the
 # letter to a character and print it. To avoid a huge monologue, we let
-# Pinch and Venus take turns insulting each other. we also use slightly
+# Pinch and Venus take turns insulting each other. We also use slightly
 # randomized versions of the assignment commands, so the scene looks less
 # boring.
 #
@@ -120,18 +122,19 @@ CODE_PRINT_PREFIX_START = """
 # Venus:
 #     Thou art as ... as .. .
 #     Speak your Mind.
-CODE_PRINT_PREFIX_ACTORS = ["Pinch", "Venus"]
+CODE_PRINT_PREFIX_CHARACTERS = ["Pinch", "Venus"]
 
 CODE_PRINT_PREFIX_END = "[Exeunt]"
 
 # === Printing the Data Section ===
 # To print the data section, we want to loop through the data and for each
 # entry, print the line that that added this entry to the stack. Since the
-# stack that currently holds the data is, contains it in reverse order, we
+# stack that currently holds the data, contains it in reverse order, we
 # first have to reverse it. This is done by the following code block which
-# moves the data from Venus to Pinch, and reverses it in the process.
-# We also create a copy of the data in correct order on Paris for the
+# moves the data from Venus to Paris, and reverses it in the process.
+# We also create a copy of the data in correct order on Pinch for the
 # second loop.
+# We use the end-of-stack symbol 0.
 CODE_PRINT_DATA_SETUP = """
 [Enter Pinch and Paris]
 
@@ -145,9 +148,9 @@ Paris:
 \t\tScene III: Reunion.
 
 [Exeunt]
-[Enter Venus and Pinch]
+[Enter Venus and Paris]
 
-Pinch:
+Paris:
 \tRecall your unhappy childhood.
 \tAre you better than nothing?
 \tIf not, let us proceed to act III.
@@ -155,15 +158,15 @@ Pinch:
 Venus:
 \tRemember me.
 
-[Exit Pinch]
-[Enter Paris]
+[Exit Paris]
+[Enter Pinch]
 
 Venus:
 \tRemember me.
 \tLet us return to scene III."""
 
-# The data is now in correct order on Pinch and Paris. We loop
-# through Pinch first.
+# The data is now in correct order on Paris and Pinch. We loop
+# through Paris first.
 # For each symbol on the stack, we generate the lines that added it to the
 # stack in the data section. This is done in a later section of the code
 # (act IV), where we jump to for each symbol. The code in act IV prints the
@@ -176,7 +179,7 @@ CODE_PRINT_DATA_LOOP = """
 \t\tScene I: Retaliation.
 
 [Exeunt]
-[Enter Venus and Pinch]
+[Enter Venus and Paris]
 
 Venus:
 \tRecall your unhappy childhood.
@@ -187,18 +190,16 @@ Venus:
 # === Printing the Code Section ===
 # The data contains the encoded code section, so to print the code section, we
 # need to loop the data again and this time just print every symbol.
-CODE_PRINT_CODE_SETUP = """
+# Since we already removed all data from Venus and Paris, we use our third
+# copy of the data, Pinch.
+CODE_PRINT_CODE_LOOP = """
 
 
 \t\tScene II: Paris's answer.
 
-[Exit Pinch]
-[Enter Paris]
-"""
+[Exeunt]
+[Enter Pinch and Venus]
 
-# Now the data is ordered correctly, and we can loop through it to print it.
-# This time, we don't need the data after the loop, so we do not copy it again.
-CODE_PRINT_CODE_LOOP = """
 Venus:
 \tRecall my forbidden love.
 \tAre you as good as nothing?
@@ -209,18 +210,18 @@ Venus:
 # === Utility Code Section ===
 # The utility section is part of the code section and works like a method that
 # generates the code in the data section for one symbol at a time.
-# Whenever we jump to this act, Pinch and Venus are on stage and Pinch's
+# Whenever we jump to this act, Paris and Venus are on stage and Paris'
 # value is the one we want to generate the push-command for.
 # We use Venus to print some stuff and as a temporary copy of
-# Pinch's value.
+# Paris' value.
 # After we are done, we return to the print loop (act III).
 UTILITY_PRINT_PUSH_COMMAND_START = """
 
 \t\t\tAct IV: Meta Play.
 
-\t\tScene I: Pinch's accusations.
+\t\tScene I: Paris' accusations.
 
-Pinch:
+Paris:
 """
 
 # === Generated block: Printing the start of the push command ===
@@ -230,7 +231,7 @@ Pinch:
 # print statements ("Speak your mind.") to print DATA_PUSH_COMMAND_BEFORE.
 
 # We then jump to a scene that prints the number literal. This is a big
-# switch-case statement over Pinch's value which we temporarily store in
+# switch-case statement over Paris' value which we temporarily store in
 # Venus.
 UTILITY_SWITCH_CASE_START = "\tYou are as villainous as me."
 
@@ -247,7 +248,7 @@ UTILITY_SWITCH_CASE_START = "\tYou are as villainous as me."
 UTILITY_SWITCH_CASE_END = """
 \t\tScene II: More accusations.
 
-Pinch:"""
+Paris:"""
 
 # === Generated block: Printing the end of the push command ===
 # The lines generated here will alternate assignments ("You are as ... as ..")
@@ -267,7 +268,7 @@ UTILITY_PRINT_LITERAL_START = """
 
 \t\tScene %s: Even more accusations.
 
-Pinch:"""
+Paris:"""
 # At the end of each scene, we return to scene II, which prints
 # DATA_PUSH_COMMAND_AFTER and returns to the main loop.
 UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."
@@ -348,18 +349,11 @@ Venus:
 #     a-z     97-122
 #
 # To keep the strings short, we also assume that some variables have certain values
+# Ajax    3
+# Page    8
+# Ford   32
 # Viola  64
-# Puck     113
-# Ajax   3
-# Page            8
-# Ford          32
-
-# TODO: We commented out symbols we do not use (like numbers and upper
-#       case letters). Instead, it would be nicer to only include the
-#       symbols we use in the code. This is a dependency loop, which we
-#       could break by adding symbols on demand and recreating the code
-#       every time we add a symbol until we added enough symbols to
-#       print everything we use.
+# Puck  113
 LITERALS = {
     9:   "the square of Ajax",
     10:  "the sum of a rural cow and Page",
