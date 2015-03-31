@@ -11,54 +11,52 @@
 PREFIX_TITLE = "An Epic Never-Ending Saga."
 
 # Variable definition. We use the following variables:
-#    Montague, the main data stack will contain all data in correct order,
+#    Pinch, the main data stack will contain all data in correct order,
 #              i.e., the first character will be at the top of his stack.
-#    Romeo, counts the current number of entries on Montague.
-#    Capulet, the reverse data stack will contain all data in reverse order,
+#    Venus, the reverse data stack will contain all data in reverse order,
 #             i.e., the first character will be at the bottom of his stack.
-#    Juliet, counts the current number of entries on Capulet.
-#    The Apothecary, constant 3 for shorter number strings.
-#    Friar John, constant 113 for shorter number strings.
-#    Friar Laurence, constant 64 for shorter number strings.
-#    Paris, constant 8 for shorter number strings.
-#    Tybalt, constant 32 for shorter number strings.
+#    Paris, counts the current number of entries on Venus.
+#    Ajax, constant 3 for shorter number strings.
+#    Puck, constant 113 for shorter number strings.
+#    Viola, constant 64 for shorter number strings.
+#    Page, constant 8 for shorter number strings.
+#    Ford, constant 32 for shorter number strings.
 # We also sometimes use variables for other purposes temporarily. This will be
 # explained at the relevant code snippets.
 PREFIX_DRAMATIS_PERSONAE = """
-Montague, a stacky person.
-Romeo, his son he can always count on.
-Capulet, the plain opposite of Montague.
-Juliet, his daughter, always remembering where he put his stuff.
-The Apothecary, a triple split personality.
-Friar John, just a number in His herd.
-Friar Laurence, wields the power the loving mighty noble Lord.
-Paris, a proud rich noble Lord.
-Tybalt, helps out with nothing.
+Pinch, a stacky person.
+Venus, the plain opposite of Pinch.
+Paris, his daughter, always remembering where he put his stuff.
+Ajax, a triple split personality.
+Puck, just a number in His herd.
+Viola, wields the power the loving mighty noble Lord.
+Page, a proud rich noble Lord.
+Ford, helps out with nothing.
 """
 
 # In the initial setup, we set the values of our constants and then get
-# Capulet and Juliet on stage to define the data stack.
+# Venus and Paris on stage to define the data stack.
 # We define the stack in order and push it on the stack letter by letter,
-# so the data will be in reverse order and we have to use Capulet instead of
-# Montague.
+# so the data will be in reverse order and we have to use Venus instead of
+# Pinch.
 # TODO: moving the constant definition into the code section and jumping there from here might save some lines.
 PREFIX_SETUP = """
 \t\t\tAct I: Prelude.
 
 \t\tScene I: Best things last.
 
-[Enter Capulet and Juliet]
+[Enter Venus and Paris]
 
-Juliet:
+Paris:
 \tLet us proceed to act V.
 
 
 
 \t\t\tAct II: Remembrance.
 
-\t\tScene I: Forgetful Capulet.
+\t\tScene I: Forgetful Venus.
 
-Juliet:
+Paris:
 \tRemember nothing.
 """
 
@@ -66,18 +64,18 @@ Juliet:
 
 # === Generated block: Data definition ===
 # The next couple of million lines will be automatically generated. They push
-# data on the stack (Capulet) that will later be used by the code block to
+# data on the stack (Venus) that will later be used by the code block to
 # recreate the data block and then to recreate the code block.
 # For each letter in the code block, the data block contains one line that
 # pushes the ascii code of that letter on the reversed data stack.
 # We do not count the elements on the stack. Instead, we write the total number
-# of elements to Juliet in the code.
+# of elements to Paris in the code.
 
-# To push a letter on the stack, Juliet tells Capulet to remember this letter:
+# To push a letter on the stack, Paris tells Venus to remember this letter:
 DATA_PUSH_COMMAND_BEFORE = "\tRemember "
 DATA_PUSH_COMMAND_AFTER = ".\n"
 
-# This command is repeated until all data is on Capulet in reversed order.
+# This command is repeated until all data is on Venus in reversed order.
 
 # =============== CODE SECTION ===============
 
@@ -94,35 +92,35 @@ DATA_PUSH_COMMAND_AFTER = ".\n"
 #    independent of the data section), this will recreate the code.
 
 # First, we print the prefix.
-# Juliet and Capulet already had their big scene, so we get Montague on stage.
-# We can use both of the stack characters (Montague and Capulet) for output
+# Paris and Venus already had their big scene, so we get Pinch on stage.
+# We can use both of the stack characters (Pinch and Venus) for output
 # here without risk of losing their data, because their data is on their stack,
 # not their current value.
 
 CODE_PRINT_PREFIX_START = """
-[Exit Juliet]
+[Exit Paris]
 
 
 \t\tScene II: Reenactment of the Past.
 
-[Enter Montague]
+[Enter Pinch]
 """
 
 # === Generated block: Printing the Prefix Section ===
 # Here we just go through the prefix section letter by letter, assign the
 # letter to a character and print it. To avoid a huge monologue, we let
-# Montague and Capulet take turns insulting each other. we also use slightly
+# Pinch and Venus take turns insulting each other. we also use slightly
 # randomized versions of the assignment commands, so the scene looks less
 # boring.
 #
 # The scene will have the general format of the following lines:
-# Montague:
+# Pinch:
 #     You are as ... as .. .
 #     Speak your Mind.
-# Capulet:
+# Venus:
 #     Thou art as ... as .. .
 #     Speak your Mind.
-CODE_PRINT_PREFIX_ACTORS = ["Montague", "Capulet"]
+CODE_PRINT_PREFIX_ACTORS = ["Pinch", "Venus"]
 
 CODE_PRINT_PREFIX_END = "[Exeunt]"
 
@@ -131,41 +129,41 @@ CODE_PRINT_PREFIX_END = "[Exeunt]"
 # entry, print the line that that added this entry to the stack. Since the
 # stack that currently holds the data is, contains it in reverse order, we
 # first have to reverse it. This is done by the following code block which
-# moves the data from Capulet to Montague, and reverses it in the process.
-# We also create a copy of the data in correct order on Juliet for the
+# moves the data from Venus to Pinch, and reverses it in the process.
+# We also create a copy of the data in correct order on Paris for the
 # second loop.
 CODE_PRINT_DATA_SETUP = """
-[Enter Montague and Juliet]
+[Enter Pinch and Paris]
 
-Montague:
+Pinch:
 \tRemember nothing.
 
-Juliet:
+Paris:
 \tRemember nothing.
 
 
 \t\tScene III: Reunion.
 
 [Exeunt]
-[Enter Capulet and Montague]
+[Enter Venus and Pinch]
 
-Montague:
+Pinch:
 \tRecall your unhappy childhood.
 \tAre you better than nothing?
 \tIf not, let us proceed to act III.
 
-Capulet:
+Venus:
 \tRemember me.
 
-[Exit Montague]
-[Enter Juliet]
+[Exit Pinch]
+[Enter Paris]
 
-Capulet:
+Venus:
 \tRemember me.
 \tLet us return to scene III."""
 
-# The data is now in correct order on Montague and Juliet. We loop
-# through Montague first.
+# The data is now in correct order on Pinch and Paris. We loop
+# through Pinch first.
 # For each symbol on the stack, we generate the lines that added it to the
 # stack in the data section. This is done in a later section of the code
 # (act IV), where we jump to for each symbol. The code in act IV prints the
@@ -178,9 +176,9 @@ CODE_PRINT_DATA_LOOP = """
 \t\tScene I: Retaliation.
 
 [Exeunt]
-[Enter Capulet and Montague]
+[Enter Venus and Pinch]
 
-Capulet:
+Venus:
 \tRecall your unhappy childhood.
 \tAre you better than nothing?
 \tIf so, we shall proceed to act IV.
@@ -192,16 +190,16 @@ Capulet:
 CODE_PRINT_CODE_SETUP = """
 
 
-\t\tScene II: Juliet's answer.
+\t\tScene II: Paris's answer.
 
-[Exeunt]
-[Enter Romeo and Juliet]
+[Exit Pinch]
+[Enter Paris]
 """
 
 # Now the data is ordered correctly, and we can loop through it to print it.
 # This time, we don't need the data after the loop, so we do not copy it again.
 CODE_PRINT_CODE_LOOP = """
-Romeo:
+Venus:
 \tRecall my forbidden love.
 \tAre you as good as nothing?
 \tIf so, we must proceed to act VI.
@@ -211,18 +209,18 @@ Romeo:
 # === Utility Code Section ===
 # The utility section is part of the code section and works like a method that
 # generates the code in the data section for one symbol at a time.
-# Whenever we jump to this act, Montague and Capulet are on stage and Montague's
+# Whenever we jump to this act, Pinch and Venus are on stage and Pinch's
 # value is the one we want to generate the push-command for.
-# We use Capulet to print some stuff and as a temporary copy of
-# Montague's value.
+# We use Venus to print some stuff and as a temporary copy of
+# Pinch's value.
 # After we are done, we return to the print loop (act III).
 UTILITY_PRINT_PUSH_COMMAND_START = """
 
 \t\t\tAct IV: Meta Play.
 
-\t\tScene I: Montague's accusations.
+\t\tScene I: Pinch's accusations.
 
-Montague:
+Pinch:
 """
 
 # === Generated block: Printing the start of the push command ===
@@ -232,12 +230,12 @@ Montague:
 # print statements ("Speak your mind.") to print DATA_PUSH_COMMAND_BEFORE.
 
 # We then jump to a scene that prints the number literal. This is a big
-# switch-case statement over Montague's value which we temporarily store in
-# Capulet.
+# switch-case statement over Pinch's value which we temporarily store in
+# Venus.
 UTILITY_SWITCH_CASE_START = "\tYou are as villainous as me."
 
 # === Generated block: switch-case ===
-# The switch-case statement checks the current value of Capulet against every
+# The switch-case statement checks the current value of Venus against every
 # number where we have a literal definition. We then jump to the scene that
 # prints the literal.
 # The code generated here will alternate between value tests ("Are you as good
@@ -249,7 +247,7 @@ UTILITY_SWITCH_CASE_START = "\tYou are as villainous as me."
 UTILITY_SWITCH_CASE_END = """
 \t\tScene II: More accusations.
 
-Montague:"""
+Pinch:"""
 
 # === Generated block: Printing the end of the push command ===
 # The lines generated here will alternate assignments ("You are as ... as ..")
@@ -269,7 +267,7 @@ UTILITY_PRINT_LITERAL_START = """
 
 \t\tScene %s: Even more accusations.
 
-Montague:"""
+Pinch:"""
 # At the end of each scene, we return to scene II, which prints
 # DATA_PUSH_COMMAND_AFTER and returns to the main loop.
 UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."
@@ -281,33 +279,33 @@ UTILITY_INITIALIZE_CONSTANTS = """
 \t\tScene I: Unchanging Insults.
 
 [Exeunt]
-[Enter Friar John and Friar Laurence]
+[Enter Puck and Viola]
 
-Friar John:
+Puck:
 \tYou are as brave as the square of a honest handsome healthy hero.
-Friar Laurence:
+Viola:
 \tYou are as lovely as the sum of myself and the square of the difference
 \tbetween the sweetest clearest pretty face and a rose.
 
 [Exeunt]
-[Enter Paris and the Apothecary]
+[Enter Page and Ajax]
 
-The Apothecary:
+Ajax:
 \tYou are a proud rich noble Lord.
 
-Paris:
+Page:
 \tThou art as trustworthy as the sum of a cunning roman and a cat.
 
-[Exit the Apothecary]
-[Enter Tybalt]
+[Exit Ajax]
+[Enter Ford]
 
-Paris:
+Page:
 \tYou are as damned as the product of your charming loving mother and a big old blossoming tree.
 
 [Exeunt]
-[Enter Capulet and Juliet]
+[Enter Venus and Paris]
 
-Juliet:
+Paris:
 \tWe shall return to act II.
 """
 
@@ -320,7 +318,7 @@ CODE_END_OF_PROGRAM = """
 
 \t\tScene I: Lap of Honour.
 
-Romeo:
+Venus:
 \tRemember the mighty fine joy. Recall that this quine was written by
 \tFlorian Pommerening and Thomas Mayer.
 
@@ -350,11 +348,11 @@ Romeo:
 #     a-z     97-122
 #
 # To keep the strings short, we also assume that some variables have certain values
-# Friar Laurence  64
-# Friar John     113
-# The Apothecary   3
-# Paris            8
-# Tybalt          32
+# Viola  64
+# Puck     113
+# Ajax   3
+# Page            8
+# Ford          32
 
 # TODO: We commented out symbols we do not use (like numbers and upper
 #       case letters). Instead, it would be nicer to only include the
@@ -363,90 +361,90 @@ Romeo:
 #       every time we add a symbol until we added enough symbols to
 #       print everything we use.
 LITERALS = {
-    9:   "the square of the Apothecary",
-    10:  "the sum of a rural cow and Paris",
+    9:   "the square of Ajax",
+    10:  "the sum of a rural cow and Page",
     # 11 - 31 not needed
-    32:  "Tybalt",
+    32:  "Ford",
     # 33 - 38 not needed
-    39:  "the sum of Tybalt and the sum of Paris and his hate",
+    39:  "the sum of Ford and the sum of Page and his hate",
     # 40 - 43 not needed
-    44:  "the difference between Friar Laurence and the sum of a healthy happy cute tiny pony and a beautiful red rose",
-    45:  "the difference between Friar Laurence and the sum of a amazing golden lovely blossoming summer's day "
-         "and the Apothecary",
-    46:  "the sum of Friar Laurence and the sum of the cursed half-witted damned distasteful flirt-gill "
+    44:  "the difference between Viola and the sum of a healthy happy cute tiny pony and a beautiful red rose",
+    45:  "the difference between Viola and the sum of a amazing golden lovely blossoming summer's day "
+         "and Ajax",
+    46:  "the sum of Viola and the sum of the cursed half-witted damned distasteful flirt-gill "
          "and the snotty leech",
-    # 47 - 57 not needed
-#    48:  "twice the product of the Apothecary and Paris",
-#    49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
-#    50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
-#    51:  "the sum of a peaceful chihuahua and the square of the difference between Paris and the wind",
-#    52:  "the difference between Friar Laurence and the sum of Paris and a amazing sunny summer's day",
-#    53:  "the sum of the cube of the Apothecary and the difference between the cube of the Apothecary and a hero",
-#    54:  "the difference between Friar Laurence and the sum of Paris and a handsome hero",
-#    55:  "the difference between Friar Laurence and the sum of Paris and a cat",
-#    56:  "the difference between Friar Laurence and Paris",
-#    57:  "the sum of the difference between Friar Laurence and Paris and a hair",
-    58:  "the sum of the difference between Friar Laurence and Paris and a rural pony",
+    # 47 not needed
+    48:  "twice the product of Ajax and Page",
+    49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
+    50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
+    51:  "the sum of a peaceful chihuahua and the square of the difference between Page and the wind",
+    52:  "the difference between Viola and the sum of Page and a amazing sunny summer's day",
+    53:  "the sum of the cube of Ajax and the difference between the cube of Ajax and a hero",
+    54:  "the difference between Viola and the sum of Page and a handsome hero",
+    55:  "the difference between Viola and the sum of Page and a cat",
+    56:  "the difference between Viola and Page",
+    57:  "the sum of the difference between Viola and Page and a hair",
+    58:  "the sum of the difference between Viola and Page and a rural pony",
     # 59 - 62 not needed
-    63:  "the sum of Friar Laurence and the devil",
+    63:  "the sum of Viola and the devil",
     # 64 not needed
-    65:  "the sum of Friar Laurence and a road",
-    66:  "the sum of the clearest sky and Friar Laurence",
-    67:  "the sum of the sum of a furry grandmother and a grandfather and Friar Laurence",
-#    68:  "the sum of Friar Laurence and a normal old road",
-    69:  "the sum of a squirrel and the sum of Friar Laurence and a furry old pony",
-    70:  "the sum of Friar Laurence and the sum of a bottomless large nose and a healthy tree",
-#    71:  "the sum of Friar Laurence and the difference between Paris and a roman",
-    72:  "the difference between Paris and a foul fatherless infected dirty oozing rotten leech",
-    73:  "the sum of the sum of Paris and a cat and Friar Laurence",
-    74:  "the sum of Paris and the sum of a lovely sky and Friar Laurence",
-#    75:  "the sum of Paris and the sum of Friar Laurence and the Apothecary",
-    76:  "the sum of Friar Laurence and the difference between a normal black good smooth road "
+    65:  "the sum of Viola and a road",
+    66:  "the sum of the clearest sky and Viola",
+    67:  "the sum of the sum of a furry grandmother and a grandfather and Viola",
+    68:  "the sum of Viola and a normal old road",
+    69:  "the sum of a squirrel and the sum of Viola and a furry old pony",
+    70:  "the sum of Viola and the sum of a bottomless large nose and a healthy tree",
+    71:  "the sum of Viola and the difference between Page and a roman",
+    72:  "the difference between Page and a foul fatherless infected dirty oozing rotten leech",
+    73:  "the sum of the sum of Page and a cat and Viola",
+    74:  "the sum of Page and the sum of a lovely sky and Viola",
+    75:  "the sum of Page and the sum of Viola and Ajax",
+    76:  "the sum of Viola and the difference between a normal black good smooth road "
          "and the reddest green rose",
-    77:  "the sum of Friar Laurence and the difference between a brave charming handsome cute hero and the Apothecary",
+    77:  "the sum of Viola and the difference between a brave charming handsome cute hero and Ajax",
     78:  "the sum of the difference between a mighty noble rich brave chihuahua and a healthy squirrel "
-         "and Friar Laurence",
-    79:  "the sum of Friar Laurence and the sum of a fair amazing beautiful fine angel and a hog",
-    80:  "the difference between Friar Laurence and a dirty fat-kidneyed misused smelly flirt-gill",
-#    81:  "the difference between Friar John and Tybalt",
-    82:  "the sum of Friar Laurence and the sum of a big mighty old gentle squirrel and a healthy door",
-    83:  "the sum of a beautiful large blossoming green mistletoe and the sum of Friar Laurence and the Apothecary",
-    84:  "the sum of Friar Laurence and the sum of the mighty fine joy and the huge pretty amazing sweet happiness",
-    85:  "the difference between Friar John and the sum of the cube of the Apothecary and a flower",
-    86:  "the difference between Friar John and the cube of the Apothecary",
-    87:  "the sum of an angel and the difference between Friar John and the cube of the Apothecary",
-    88:  "the sum of Friar Laurence and the difference between a big loving rich trustworthy aunt "
+         "and Viola",
+    79:  "the sum of Viola and the sum of a fair amazing beautiful fine angel and a hog",
+    80:  "the difference between Viola and a dirty fat-kidneyed misused smelly flirt-gill",
+    81:  "the difference between Puck and Ford",
+    82:  "the sum of Viola and the sum of a big mighty old gentle squirrel and a healthy door",
+    83:  "the sum of a beautiful large blossoming green mistletoe and the sum of Viola and Ajax",
+    84:  "the sum of Viola and the sum of the mighty fine joy and the huge pretty amazing sweet happiness",
+    85:  "the difference between Puck and the sum of the cube of Ajax and a flower",
+    86:  "the difference between Puck and the cube of Ajax",
+    87:  "the sum of an angel and the difference between Puck and the cube of Ajax",
+    88:  "the sum of Viola and the difference between a big loving rich trustworthy aunt "
          "and a evil smelly villainous hound",
-    89:  "the sum of the Apothecary and the difference between Friar John and the cube of the Apothecary",
-#    90:  "the sum of the difference between Friar John and the cube of the Apothecary and a golden furry hair",
-    91:  "the sum of Friar Laurence and the cube of the Apothecary",
+    89:  "the sum of Ajax and the difference between Puck and the cube of Ajax",
+    90:  "the sum of the difference between Puck and the cube of Ajax and a golden furry hair",
+    91:  "the sum of Viola and the cube of Ajax",
     # 92 not needed
-    93:  "the sum of Friar Laurence and the difference between Tybalt and the Apothecary",
+    93:  "the sum of Viola and the difference between Ford and Ajax",
     # 94 - 96 not needed
-    97:  "the difference between Friar John and twice Paris",
-    98:  "the sum of Tybalt and the sum of Friar Laurence and the bluest sky",
-    99:  "the sum of Friar Laurence and the sum of Tybalt and the Apothecary",
-    100: "the square of the sum of Paris and his brave hero",
-    101: "the sum of Friar John and the sum of a horrible stinking smelly codpiece and a hairy dusty hog",
-    102: "the sum of the cursed foul infected blister and the difference between Friar John and the Apothecary",
-    103: "the difference between Friar John and the sum of a delicious healthy sweet horse and a normal cat",
-    104: "the sum of the sum of a beggar and Friar John and a half-witted disgusting sorry coward",
-    105: "the difference between Friar John and Paris",
-    106: "the sum of a snotty oozing fat-kidneyed flirt-gill and the sum of a plum and Friar John",
-    107: "the difference between Friar John and the sum of a tiny old proud chihuahua and a cowardly goat",
-    108: "the sum of Friar John and the difference between the Apothecary and Paris",
-    109: "the sum of Friar John and an infected stinking bastard",
-    110: "the difference between Friar John and the Apothecary",
-    111: "the difference between Friar John and a furry animal",
-    112: "the sum of Friar John and a plague",
-    113: "Friar John",
-    114: "the sum of Friar John and the Lord",
-    115: "the difference between Friar John and a fat pig",
-    116: "the sum of Friar John and the Apothecary",
-    117: "the sum of Friar John and a little gentle chihuahua",
-    118: "the difference between Friar John and the sum of a fatherless vile devil and the Hell",
-    119: "the sum of Friar John and the sum of the clearest sweetest summer's day and the reddest rose",
-    120: "the sum of a black bottomless face and the sum of Friar John and the Apothecary",
-    121: "the sum of Friar John and Paris",
-    122: "the difference between twice Friar Laurence and the sum of a tiny old town and a large tree",
+    97:  "the difference between Puck and twice Page",
+    98:  "the sum of Ford and the sum of Viola and the bluest sky",
+    99:  "the sum of Viola and the sum of Ford and Ajax",
+    100: "the square of the sum of Page and his brave hero",
+    101: "the sum of Puck and the sum of a horrible stinking smelly codpiece and a hairy dusty hog",
+    102: "the sum of the cursed foul infected blister and the difference between Puck and Ajax",
+    103: "the difference between Puck and the sum of a delicious healthy sweet horse and a normal cat",
+    104: "the sum of the sum of a beggar and Puck and a half-witted disgusting sorry coward",
+    105: "the difference between Puck and Page",
+    106: "the sum of a snotty oozing fat-kidneyed flirt-gill and the sum of a plum and Puck",
+    107: "the difference between Puck and the sum of a tiny old proud chihuahua and a cowardly goat",
+    108: "the sum of Puck and the difference between Ajax and Page",
+    109: "the sum of Puck and an infected stinking bastard",
+    110: "the difference between Puck and Ajax",
+    111: "the difference between Puck and a furry animal",
+    112: "the sum of Puck and a plague",
+    113: "Puck",
+    114: "the sum of Puck and the Lord",
+    115: "the difference between Puck and a fat pig",
+    116: "the sum of Puck and Ajax",
+    117: "the sum of Puck and a little gentle chihuahua",
+    118: "the difference between Puck and the sum of a fatherless vile devil and the Hell",
+    119: "the sum of Puck and the sum of the clearest sweetest summer's day and the reddest rose",
+    120: "the sum of a black bottomless face and the sum of Puck and Ajax",
+    121: "the sum of Puck and Page",
+    122: "the difference between twice Viola and the sum of a tiny old town and a large tree",
 }
