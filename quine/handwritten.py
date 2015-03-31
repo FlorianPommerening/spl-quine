@@ -59,6 +59,7 @@ Juliet:
 \t\tScene I: Forgetful Capulet.
 
 Juliet:
+\tRemember nothing.
 """
 
 # =============== DATA SECTION ===============
@@ -92,16 +93,7 @@ DATA_PUSH_COMMAND_AFTER = ".\n"
 #    encodes the code section (which we can do, because the code section is
 #    independent of the data section), this will recreate the code.
 
-# We start by setting Juliet to the number of items on the stack.
-# This is part of the code, but need to know the size of the code.
-# See codesection.py for details.
-
-CODE_WRITE_CODE_SIZE = """
-Capulet:
-\tYou are nothing.
-"""
-
-# Next, we print the prefix.
+# First, we print the prefix.
 # Juliet and Capulet already had their big scene, so we get Montague on stage.
 # We can use both of the stack characters (Montague and Capulet) for output
 # here without risk of losing their data, because their data is on their stack,
@@ -140,14 +132,16 @@ CODE_PRINT_PREFIX_END = "[Exeunt]"
 # stack that currently holds the data is, contains it in reverse order, we
 # first have to reverse it. This is done by the following code block which
 # moves the data from Capulet to Montague, and reverses it in the process.
-# Capulet is also used as a temporary copy of Juliet's value to avoid calling
-# her on stage for the test that ends the loop.
-# Romeo counts the elements on Montague, but instead of adding one for each new
-# element, we copy the total count before reversing the stack.
-CODE_PRINT_DATA_SETUP = """[Enter Romeo and Juliet]
+# We also create a copy of the data in correct order on Juliet for the
+# second loop.
+CODE_PRINT_DATA_SETUP = """
+[Enter Montague and Juliet]
+
+Montague:
+\tRemember nothing.
 
 Juliet:
-\tYou are as loving as me.
+\tRemember nothing.
 
 
 \t\tScene III: Reunion.
@@ -156,40 +150,27 @@ Juliet:
 [Enter Capulet and Montague]
 
 Montague:
-\tYou are as dirty as Juliet.
-\tAre you better than nothing?
-\tIf not, let us proceed to scene IV.
 \tRecall your unhappy childhood.
+\tAre you better than nothing?
+\tIf not, let us proceed to act III.
 
 Capulet:
 \tRemember me.
 
-[Exit Capulet]
+[Exit Montague]
 [Enter Juliet]
 
-Montague:
-\tYou are as smelly as the sum of yourself and a flirt-gill.
-\tWe must return to scene III."""
+Capulet:
+\tRemember me.
+\tLet us return to scene III."""
 
-# The data is now in correct order on Montague. We loop through it (just like
-# the last code block did) and move it back on Capulet. We need to do this,
-# because we will later need a second copy of the data.
+# The data is now in correct order on Montague and Juliet. We loop
+# through Montague first.
 # For each symbol on the stack, we generate the lines that added it to the
 # stack in the data section. This is done in a later section of the code
 # (act IV), where we jump to for each symbol. The code in act IV prints the
 # lines and then returns to the start of the loop (act III).
-# Again, the data is moved to Capulet and is reversed in the process, and
-# again, Juliet counts elements on Capulet but is copied before the loop rather
-# than incremented in the loop.
 CODE_PRINT_DATA_LOOP = """
-\t\tScene IV: Romeo's answer.
-
-[Exeunt]
-[Enter Romeo and Juliet]
-
-Romeo:
-\tYou are as loving as me.
-
 
 
 \t\tAct III: Output.
@@ -200,93 +181,49 @@ Romeo:
 [Enter Capulet and Montague]
 
 Capulet:
-\tYou are as dirty as Romeo.
-\tAre you better than nothing?
-\tIf not, let us proceed to scene II.
 \tRecall your unhappy childhood.
-
-Montague:
-\tRemember me.
-
-[Exit Montague]
-[Enter Romeo]
-
-Capulet:
-\tYou are as smelly as the sum of yourself and a wolf.
-\tWe shall proceed to act IV."""
+\tAre you better than nothing?
+\tIf so, we shall proceed to act IV.
+\tLet us proceed to scene II."""
 
 # === Printing the Code Section ===
 # The data contains the encoded code section, so to print the code section, we
 # need to loop the data again and this time just print every symbol.
-# As before, we have the data on Capulet in reversed order, so we have to
-# reverse it before we can print it.
 CODE_PRINT_CODE_SETUP = """
+
+
 \t\tScene II: Juliet's answer.
 
 [Exeunt]
 [Enter Romeo and Juliet]
-
-Juliet:
-\tYou are as loving as me.
-
-
-\t\tScene III: Re-Retaliation.
-
-[Exeunt]
-[Enter Capulet and Montague]
-
-Montague:
-\tYou are as dirty as Juliet.
-\tAre you better than nothing?
-\tIf not, let us proceed to scene IV.
-\tRecall your unhappy childhood.
-
-Capulet:
-\tRemember me.
-
-[Exit Capulet]
-[Enter Juliet]
-
-Montague:
-\tYou are as smelly as the sum of yourself and a flirt-gill.
-\tWe must return to scene III."""
+"""
 
 # Now the data is ordered correctly, and we can loop through it to print it.
 # This time, we don't need the data after the loop, so we do not copy it again.
 CODE_PRINT_CODE_LOOP = """
-\t\tScene IV: Montague loses it.
-
-[Exeunt]
-[Enter Montague and Romeo]
-
-Montague:
-\tAre you as good as nothing?
-\tIf so, we must proceed to act VI.
-
 Romeo:
 \tRecall my forbidden love.
+\tAre you as good as nothing?
+\tIf so, we must proceed to act VI.
 \tSpeak your mind.
-
-Montague:
-\tYou are as rotten as the sum of yourself and the plague.
-\tWe must return to scene IV."""
+\tWe must return to scene II."""
 
 # === Utility Code Section ===
 # The utility section is part of the code section and works like a method that
 # generates the code in the data section for one symbol at a time.
-# Whenever we jump to this act, Romeo and Capulet are on stage and Montague's
+# Whenever we jump to this act, Montague and Capulet are on stage and Montague's
 # value is the one we want to generate the push-command for.
-# We use Romeo to print some stuff and as a temporary copy of Montague, so
-# first we store his current value on his stack. We will restore it just before
-# returning to the print loop (act III).
+# We use Capulet to print some stuff and as a temporary copy of
+# Montague's value.
+# After we are done, we return to the print loop (act III).
 UTILITY_PRINT_PUSH_COMMAND_START = """
 
 \t\t\tAct IV: Meta Play.
 
-\t\tScene I: Capulet's accusations.
+\t\tScene I: Montague's accusations.
 
-Capulet:
-\tRemember yourself."""
+Montague:
+"""
 
 # === Generated block: Printing the start of the push command ===
 # Every push command starts and ends in the same way (DATA_PUSH_COMMAND_BEFORE
@@ -296,11 +233,11 @@ Capulet:
 
 # We then jump to a scene that prints the number literal. This is a big
 # switch-case statement over Montague's value which we temporarily store in
-# Romeo.
-UTILITY_SWITCH_CASE_START = "\tYou are as villainous as Montague."
+# Capulet.
+UTILITY_SWITCH_CASE_START = "\tYou are as villainous as me."
 
 # === Generated block: switch-case ===
-# The switch-case statement checks the current value of Romeo against every
+# The switch-case statement checks the current value of Capulet against every
 # number where we have a literal definition. We then jump to the scene that
 # prints the literal.
 # The code generated here will alternate between value tests ("Are you as good
@@ -312,16 +249,14 @@ UTILITY_SWITCH_CASE_START = "\tYou are as villainous as Montague."
 UTILITY_SWITCH_CASE_END = """
 \t\tScene II: More accusations.
 
-Capulet:"""
+Montague:"""
 
 # === Generated block: Printing the end of the push command ===
 # The lines generated here will alternate assignments ("You are as ... as ..")
 # and print statements ("Speak your mind.") to print DATA_PUSH_COMMAND_AFTER.
 
-# After we printed DATA_PUSH_COMMAND_AFTER, we return to the main loop. Before
-# that, we have to restore Romeo's original value from his stack.
+# After we printed DATA_PUSH_COMMAND_AFTER, we return to the main loop.
 UTILITY_PRINT_PUSH_COMMAND_END = """
-\tRecall everything I told you.
 \tWe shall return to act III.
 """
 
@@ -334,7 +269,7 @@ UTILITY_PRINT_LITERAL_START = """
 
 \t\tScene %s: Even more accusations.
 
-Capulet:"""
+Montague:"""
 # At the end of each scene, we return to scene II, which prints
 # DATA_PUSH_COMMAND_AFTER and returns to the main loop.
 UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."

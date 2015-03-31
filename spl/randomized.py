@@ -8,23 +8,6 @@ from . import tokens
 random.seed(0)
 
 
-def assign_number_command(value):
-    code_lines = []
-    while value:
-        l = int(math.log(value, 2))
-        value -= 2**l
-        command = random.choice(tokens.ASSIGNMENT_COMMANDS)
-        compare_adjective = random.choice(tokens.ADJECTIVES)
-        value_tokens = [random.choice(tokens.POSITIVE_ADJECTIVES)
-                        for _ in range(l)]
-        value_tokens.append(random.choice(tokens.POSITIVE_NOUNS))
-        literal = "the sum of yourself and the %s" % (
-            " ".join(value_tokens)
-        )
-        code_lines += ["\t" + command % (compare_adjective, literal)]
-    return "\n".join(code_lines)
-
-
 def assign_value_command(value):
     command = random.choice(tokens.ASSIGNMENT_COMMANDS)
     adjective = random.choice(tokens.ADJECTIVES)
