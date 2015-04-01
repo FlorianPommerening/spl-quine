@@ -37,15 +37,30 @@ It also omits some literals that are not used in the code from the
 utility section (specifically: all number and some upper case letters).
 The list of omitted literals is hardcoded, however.
 
+
 === v1.3 ===
 
 Lines of code: ~337 thousand
 Time to translate to c: ~30 minutes
 Time to compile: ~15 minutes
-Memory required to compile: ~8.5 GB
+Memory required to compile: ~9 GB
 
 This version uses end-of-stack symbols instead of coding the code length
 into the code. It also decides automatically which literals to include
 in the quine. This means it is now easier to save code by avoiding some
 letters in the whole code. We also use shorter variable names to bring
 the code size down.
+
+
+=== v1.4 ===
+
+Lines of code: ~180 thousand
+Time to translate to c: ~6 minutes
+Time to compile: ~4 minutes
+Memory required to compile: ~4 GB
+
+Here we optimize the constants we use so they don't just make the
+literal shorter on average, but also have specifically short literal
+strings for characters that are used more often. The result of some
+brute-force experimentation, unsurprisingly, was to use constants for
+the five most common characters (a,e,n,t, and space).
