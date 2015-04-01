@@ -17,22 +17,22 @@ PREFIX_TITLE = "An Epic Never-Ending Saga."
 #              i.e., the first letter will be at the top of his stack.
 #    Venus, the reverse data stack will contain all data in reverse order,
 #             i.e., the first letter will be at the bottom of his stack.
-#    Ajax, constant 3 for shorter number strings.
-#    Page, constant 8 for shorter number strings.
-#    Ford, constant 32 for shorter number strings.
-#    Viola, constant 64 for shorter number strings.
-#    Puck, constant 113 for shorter number strings.
+#    Puck, constant 32 for shorter number strings.
+#    Ajax, constant 97 for shorter number strings.
+#    Page, constant 101 for shorter number strings.
+#    Ford, constant 110 for shorter number strings.
+#    Viola, constant 116 for shorter number strings.
 # We also sometimes use variables for other purposes temporarily. This will be
 # explained at the relevant code snippets.
 PREFIX_DRAMATIS_PERSONAE = """
 Paris, a stacky person.
 Pinch, impersonates Paris.
 Venus, the opposite of Paris and Pinch.
-Ajax, a triple split personality.
-Page, a proud rich noble Lord.
-Ford, helps out with nothing.
-Viola, is twice as brave as Ford.
-Puck, a random bystander.
+Puck, continuously speaking.
+Ajax, constantly complaining.
+Page, perpetually blabbing.
+Ford, incessantly talking.
+Viola, ceaselessly communicating.
 """
 
 # In the initial setup, we set the values of our constants and then get
@@ -274,34 +274,39 @@ Paris:"""
 UTILITY_PRINT_LITERAL_END = "\tLet us return to scene II."
 
 
+# Set the constants to their values:
+# Puck   32
+# Ajax   97
+# Page  101
+# Ford  110
+# Viola 116
 UTILITY_INITIALIZE_CONSTANTS = """
 \t\t\tAct V: Perpetual Talking.
 
 \t\tScene I: Immutable Insults.
 
 [Exeunt]
-[Enter Puck and Viola]
-
-Puck:
-\tYou are as brave as the square of a honest handsome healthy hero.
-Viola:
-\tYou are as lovely as the sum of myself and the square of the difference
-\tbetween the sweetest clearest pretty face and a rose.
-
-[Exeunt]
-[Enter Page and Ajax]
+[Enter Puck and Ajax]
 
 Ajax:
-\tYou are a proud rich noble Lord.
+\tYou are as lovely as the sweetest clearest pretty handsome gentle face.
+Puck:
+\tYou are as sorry as the sum of myself and the sum of twice myself and your sister.
+
+[Exeunt]
+[Enter Page and Ford]
+
+Ford:
+\tYou are as disgusting as the sum of Ajax and a proud rich Lord.
 
 Page:
-\tThou art as trustworthy as the sum of a cunning roman and a cat.
+\tThou art as trustworthy as the sum of Page and the square root of Ajax.
 
-[Exit Ajax]
-[Enter Ford]
+[Exit Ford]
+[Enter Viola]
 
 Page:
-\tYou are as damned as the product of your charming loving mother and a big old blossoming tree.
+\tYou are as damned as the sum of your loving mother and the sum of a old blossoming tree and Ford.
 
 [Exeunt]
 [Enter Venus and Paris]
@@ -349,96 +354,91 @@ Venus:
 #     a-z     97-122
 #
 # To keep the strings short, we also assume that some variables have certain values
-# Ajax    3
-# Page    8
-# Ford   32
-# Viola  64
-# Puck  113
+# Puck   32
+# Ajax   97
+# Page  101
+# Ford  110
+# Viola 116
 LITERALS = {
-    9:   "the square of Ajax",
-    10:  "the sum of a rural cow and Page",
+    9:   "the square root of Ajax",
+    10:  "the square root of Page",
     # 11 - 31 not needed
-    32:  "Ford",
+    32:  "Puck",
     # 33 - 38 not needed
-    39:  "the sum of Ford and the sum of Page and his hate",
+    39:  "the sum of a happy tiny furry chihuahua and the sum of Puck and his hate",
     # 40 - 43 not needed
-    44:  "the difference between Viola and the sum of a healthy happy cute tiny pony and a beautiful red rose",
-    45:  "the difference between Viola and the sum of a amazing golden lovely blossoming summer's day "
-         "and Ajax",
-    46:  "the sum of Viola and the sum of the cursed half-witted damned distasteful flirt-gill "
-         "and the snotty leech",
+    44:  "the difference between the sum of Ford and my smelly codpiece and twice Puck",
+    45:  "the sum of Puck and the difference between Ford and Ajax",
+    46:  "the difference between Ford and twice Puck",
     # 47 not needed
-    48:  "twice the product of Ajax and Page",
-    49:  "the square of the difference between a famine and a fat-kidneyed sorry miserable starvation",
-    50:  "the sum of a hamster and the square of the difference between a hound and a dirty disgusting hairy wolf",
-    51:  "the sum of a peaceful chihuahua and the square of the difference between Page and the wind",
-    52:  "the difference between Viola and the sum of Page and a amazing sunny summer's day",
-    53:  "the sum of the cube of Ajax and the difference between the cube of Ajax and a hero",
-    54:  "the difference between Viola and the sum of Page and a handsome hero",
-    55:  "the difference between Viola and the sum of Page and a cat",
-    56:  "the difference between Viola and Page",
-    57:  "the sum of the difference between Viola and Page and a hair",
-    58:  "the sum of the difference between Viola and Page and a rural pony",
+    48:  "twice the factorial of a big old thing",
+    49:  "the square of the sum of a coward and a brave mighty fine hero",
+    50:  "the product of the square root of Puck and the square root of Page",
+    51:  "the sum of the difference between Viola and Ajax and Puck",
+    52:  "the difference between Viola and twice Puck",
+    53:  "the difference between the sum of Viola and her pony and twice Puck",
+    54:  "the difference between twice Puck and the square root of Page",
+    55:  "the square root of the product of Puck and Ajax",
+    56:  "twice the sum of Puck and his horrid hairy hound",
+    57:  "the sum of twice Puck and the sum of his aunt and his infected half-witted fat bastard",
+    58:  "the sum of twice Puck and the difference between Ford and Viola",
     # 59 - 62 not needed
-    63:  "the sum of Viola and the devil",
+    63:  "the sum of twice Puck and his lie",
     # 64 not needed
-    65:  "the sum of Viola and a road",
-    66:  "the sum of the clearest sky and Viola",
-    67:  "the sum of the sum of a furry grandmother and a grandfather and Viola",
-    68:  "the sum of Viola and a normal old road",
-    69:  "the sum of a squirrel and the sum of Viola and a furry old pony",
-    70:  "the sum of Viola and the sum of a bottomless large nose and a healthy tree",
-    71:  "the sum of Viola and the difference between Page and a roman",
-    72:  "the difference between Page and a foul fatherless infected dirty oozing rotten leech",
-    73:  "the sum of the sum of Page and a cat and Viola",
-    74:  "the sum of Page and the sum of a lovely sky and Viola",
-    75:  "the sum of Page and the sum of Viola and Ajax",
-    76:  "the sum of Viola and the difference between a normal black good smooth road "
-         "and the reddest green rose",
-    77:  "the sum of Viola and the difference between a brave charming handsome cute hero and Ajax",
-    78:  "the sum of the difference between a mighty noble rich brave chihuahua and a healthy squirrel "
-         "and Viola",
-    79:  "the sum of Viola and the sum of a fair amazing beautiful fine angel and a hog",
-    80:  "the difference between Viola and a dirty fat-kidneyed misused smelly flirt-gill",
-    81:  "the difference between Puck and Ford",
-    82:  "the sum of Viola and the sum of a big mighty old gentle squirrel and a healthy door",
-    83:  "the sum of a beautiful large blossoming green mistletoe and the sum of Viola and Ajax",
-    84:  "the sum of Viola and the sum of the mighty fine hero and the huge pretty amazing sweet happiness",
-    85:  "the difference between Puck and the sum of the cube of Ajax and a flower",
-    86:  "the difference between Puck and the cube of Ajax",
-    87:  "the sum of an angel and the difference between Puck and the cube of Ajax",
-    88:  "the sum of Viola and the difference between a big loving rich trustworthy aunt "
-         "and a evil smelly villainous hound",
-    89:  "the sum of Ajax and the difference between Puck and the cube of Ajax",
-    90:  "the sum of the difference between Puck and the cube of Ajax and a golden furry hair",
-    91:  "the sum of Viola and the cube of Ajax",
+    65:  "the sum of twice Puck and his son",
+    66:  "twice the sum of Puck and my daughter",
+    67:  "the sum of twice Puck and the sum of a kingdom and an honest King",
+    68:  "twice the sum of a peaceful hamster and Puck",
+    69:  "the difference between Page and Puck",
+    70:  "the sum of a tree and the difference between Page and Puck",
+    71:  "the sum of a cunning cat and the difference between Page and Puck",
+    72:  "twice the sum of Puck and his proud large face",
+    73:  "the sum of the square root of Ajax and twice Puck",
+    74:  "the sum of the square root of Page and twice Puck",
+    75:  "the sum of the square root of Page and the difference between Ajax and Puck",
+    76:  "the sum of an infected blister and the difference between Ford and Puck",
+    77:  "the sum of the difference between Ford and Puck and their war",
+    78:  "the difference between Ford and Puck",
+    79:  "the sum of happiness and the difference between Ford and Puck",
+    80:  "twice the sum of a small rural old town and Puck",
+    81:  "the square of the square root of Ajax",
+    82:  "the sum of Ajax and the difference between Page and Viola",
+    83:  "the sum of a bastard and the difference between Viola and Puck",
+    84:  "the difference between Viola and Puck",
+    85:  "the sum of Page and the evil snotty lying villainous flirt-gill",
+    86:  "the difference between twice Page and Viola",
+    87:  "the difference between Ajax and the square root of Page",
+    88:  "the difference between Ajax and the square root of Ajax",
+    89:  "the sum of Ajax and the fatherless rotten dirty bastard",
+    90:  "the sum of a cow and the sum of Ajax and his stupid distasteful foul lie",
+    91:  "the difference between Page and the square root of Page",
     # 92 not needed
-    93:  "the sum of Viola and the difference between Ford and Ajax",
+    93:  "the sum of Ajax and the stupid rural goat",
     # 94 - 96 not needed
-    97:  "the difference between Puck and twice Page",
-    98:  "the sum of Ford and the sum of Viola and the bluest sky",
-    99:  "the sum of Viola and the sum of Ford and Ajax",
-    100: "the square of the sum of Page and his brave hero",
-    101: "the sum of Puck and the sum of a horrible stinking smelly codpiece and a hairy dusty hog",
-    102: "the sum of the cursed foul infected blister and the difference between Puck and Ajax",
-    103: "the difference between Puck and the sum of a delicious healthy sweet horse and a normal cat",
-    104: "the sum of the sum of a beggar and Puck and a half-witted disgusting sorry coward",
-    105: "the difference between Puck and Page",
-    106: "the sum of a snotty oozing fat-kidneyed flirt-gill and the sum of a plum and Puck",
-    107: "the difference between Puck and the sum of a tiny old proud chihuahua and a cowardly goat",
-    108: "the sum of Puck and the difference between Ajax and Page",
-    109: "the sum of Puck and an infected stinking bastard",
-    110: "the difference between Puck and Ajax",
-    111: "the difference between Puck and a furry animal",
-    112: "the sum of Puck and a plague",
-    113: "Puck",
-    114: "the sum of Puck and the Lord",
-    115: "the difference between Puck and a fat pig",
-    116: "the sum of Puck and Ajax",
-    117: "the sum of Puck and a little gentle chihuahua",
-    118: "the difference between Puck and the sum of a fatherless vile devil and the Hell",
-    119: "the sum of Puck and the sum of the clearest sweetest summer's day and the reddest rose",
-    120: "the sum of a black bottomless face and the sum of Puck and Ajax",
-    121: "the sum of Puck and Page",
-    122: "the difference between twice Viola and the sum of a tiny old town and a large tree",
+    97:  "Ajax",
+    98:  "the sum of Ajax and his horse",
+    99:  "the sum of Ajax and your sweet niece",
+    100: "the sum of Page and your curse",
+    101: "Page",
+    102: "the sum of Page and the wind",
+    103: "the sum of Page and a sunny summer's day",
+    104: "the difference between twice Ford and Viola",
+    105: "the sum of Page and his large golden purse",
+    106: "the sum of Ford and the cowardly vile leech",
+    107: "the sum of the square root of Page and Ajax",
+    108: "the sum of Ford and a bad draught",
+    109: "the sum of Ford and a famine",
+    110: "Ford",
+    111: "the sum of the Lord and Ford",
+    112: "the sum of a golden angel and Ford",
+    113: "the sum of Ajax and your big old mighty fine hero",
+    114: "the sum of Viola and the lying devil",
+    115: "the sum of Viola and your death",
+    116: "Viola",
+    117: "the sum of Viola and a flower",
+    118: "the sum of Viola and a blossoming rose",
+    119: "the difference between twice Ford and Page",
+    120: "the sum of Viola and her healthy delicious pony",
+    121: "the sum of the square root of Puck and Viola",
+    122: "the difference between twice Viola and Ford",
 }
