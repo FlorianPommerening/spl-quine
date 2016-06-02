@@ -26,7 +26,7 @@ the quine source code.
 To compile and run it, you are going to need a version of `spl2c` and
 `gcc`. The official release of SPL 1.2.1 still contains a few minor bugs.
 Kyle Cartmell [forked the code](https://bitbucket.org/kcartmell/marlowe) 
-and fixed some of them, and we [forked his code again](https://bitbucket.org/flogo/spl-fixes)
+and fixed some of them, and we [forked his code again](https://bitbucket.org/FlorianPommerening/spl-fixes)
 for some additional fixes.
 Clone our version parallel to this clone, build and install (`make
 install`) spl there. Our Makefile looks for spl2c in `../spl/spl/spl2c`
